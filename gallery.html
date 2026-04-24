@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Afolashade Joy Jubrilla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300,1,400;1,500&family=Jost:wght@200,300,400,500,600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+  <style>
+    /* Only gallery-specific overrides here */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .6s ease;
+    }
+    .loader-content { text-align: center; }
+    .loader-name {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 36px;
+    }
+    .loader-name span { color: var(--gold); }
+    .loader-bar {
+      width: 180px;
+      height: 1px;
+      background: var(--dim);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      width: 100%;
+      background: var(--gold);
+      animation: load-fill 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    @keyframes load-fill { from{width:0} to{width:100%} }
+    .loader-initials {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.25;
+      margin-top: 48px;
+    }
+    .page-transition {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    .transition-curtain {
+      position: absolute;
+      inset: 0;
+      background: var(--bg);
+      transform: translateY(100%);
+    }
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      z-index: 1001;
+      transform-origin: left;
+      transform: scaleX(0);
+      width: 100%;
+    }
+
+    /* Hero Section - Premium */
+    .gallery-hero { 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      padding: 140px 6vw 80px; 
+      background: var(--bg); 
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(200,169,110,.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(200,169,110,.04) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .hero-number {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 15vw, 14rem);
+      font-weight: 300;
+      color: rgba(200,169,110,.04);
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .gallery-hero .eyebrow { 
+      font-size: .66rem; letter-spacing: .4em; text-transform: uppercase; 
+      color: var(--gold); margin-bottom: 24px; 
+      position: relative;
+    }
+    .gallery-hero .eyebrow::before {
+      content: '';
+      width: 40px; height: 1px; background: var(--gold);
+      display: inline-block; margin-right: 16px; vertical-align: middle;
+    }
+    .gallery-hero .display { 
+      font-family: var(--font-display); 
+      font-size: clamp(3rem, 9vw, 8rem); 
+      font-weight: 400; 
+      line-height: .95; 
+      color: var(--white); 
+      position: relative;
+    }
+    .gallery-hero .display em { font-style: italic; color: var(--gold); }
+    .gallery-hero .lead { 
+      font-size: 1.1rem; color: var(--cream2); 
+      margin-top: 32px; 
+      max-width: 520px; 
+      line-height: 1.8;
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 6vw;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0.5;
+    }
+    .hero-scroll-hint span {
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 40px; height: 1px;
+      background: var(--gold);
+      position: relative;
+      overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; height: 100%; width: 100%;
+      background: var(--gold);
+      transform: translateX(-100%);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+    }
+
+    /* Fullscreen Gallery - Premium */
+    .gallery-fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: var(--bg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .5s var(--ease);
+    }
+    .gallery-fullscreen.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .fullscreen-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      width: 50px; height: 50px;
+      background: none;
+      border: 1px solid var(--dim);
+      color: var(--cream);
+      font-size: 1.5rem;
+      cursor: none;
+      z-index: 10;
+      transition: all .3s;
+    }
+    .fullscreen-close:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .fullscreen-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+    }
+    .fullscreen-image.active { opacity: 1; }
+    .fullscreen-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px; height: 60px;
+      background: rgba(6,6,9,.7);
+      border: 1px solid var(--dim);
+      color: var(--cream);
+      font-size: 1.5rem;
+      cursor: none;
+      transition: all .3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fullscreen-nav:hover {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+    .fullscreen-prev { left: 30px; }
+    .fullscreen-next { right: 30px; }
+    .fullscreen-counter {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: .72rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .fullscreen-thumbnails {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+    .thumb {
+      width: 50px; height: 35px;
+      object-fit: cover;
+      opacity: 0.4;
+      cursor: none;
+      transition: all .3s;
+      border: 1px solid transparent;
+    }
+    .thumb:hover, .thumb.active {
+      opacity: 1;
+      border-color: var(--gold);
+    }
+
+    /* Gallery Grid - Premium Cards */
+    .gallery-section {
+      padding: 100px 6vw;
+      background: var(--bg);
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .gallery-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 400;
+      color: var(--white);
+    }
+    .gallery-header h2 em { font-style: italic; color: var(--gold); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .gallery-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      cursor: none;
+      background: var(--bg3);
+    }
+    .gallery-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,6,9,.9) 0%, transparent 50%);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity .4s var(--ease);
+    }
+    .gallery-card:hover::before { opacity: 1; }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .8s var(--ease), filter .4s;
+      filter: grayscale(30%) brightness(.8);
+    }
+    .gallery-card:hover img {
+      transform: scale(1.1);
+      filter: grayscale(0%) brightness(1);
+    }
+    .gallery-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      z-index: 3;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all .4s var(--ease);
+    }
+    .gallery-card:hover .gallery-card-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .gallery-card-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .gallery-card-category {
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .gallery-card-number {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: rgba(255,255,255,.1);
+      z-index: 2;
+      transition: color .3s;
+    }
+    .gallery-card:hover .gallery-card-number {
+      color: rgba(200,169,110,.3);
+    }
+
+    /* Floating Gallery Link */
+    .gallery-floating-cta {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--gold);
+      color: var(--bg);
+      padding: 14px 28px;
+      text-decoration: none;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all .3s var(--ease);
+      box-shadow: 0 10px 40px rgba(200,169,110,.3);
+    }
+    .gallery-floating-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 50px rgba(200,169,110,.4);
+    }
+    .gallery-floating-cta span {
+      font-size: 1.2rem;
+    }
+
+    /* Footer */
+    footer { background: var(--bg2); padding: 60px 6vw; border-top: 1px solid rgba(30,28,42,.5); }
+    footer .footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+    footer .footer-logo { font-family: var(--font-display); font-size: 1.2rem; color: var(--cream); }
+    footer .footer-logo span { color: var(--gold); }
+    footer .footer-tagline { font-size: .8rem; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+    footer .footer-col-title { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+    footer .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    footer .footer-links a { font-size: .8rem; color: var(--muted); text-decoration: none; transition: color .3s; }
+    footer .footer-links a:hover { color: var(--gold); }
+    footer .footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(30,28,42,.3); display: flex; justify-content: space-between; }
+    footer .footer-copy { font-size: .72rem; color: var(--muted); }
+    
+
+    /* Responsive */
+    @media(max-width: 1100px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media(max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .mob-tog { display: flex; background: none; border: 1px solid var(--gold); color: var(--gold); width: 40px; height: 40px; font-size: 1.2rem; cursor: none; align-items: center; justify-content: center; }
+      .gallery-hero { min-height: 80vh; }
+      .gallery-header { margin-bottom: 60px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .gallery-card { aspect-ratio: 4/5; }
+      footer .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+      #c-dot, #c-ring { display: none; }
+    }
+
+    @media(max-width: 600px) {
+      .gallery-hero { padding: 120px 5vw 60px; min-height: 70vh; }
+      .gallery-hero .display { font-size: clamp(2.2rem, 12vw, 3.5rem); }
+      .gallery-hero .lead { font-size: 1rem; }
+      .hero-number { font-size: clamp(4rem, 20vw, 8rem); }
+      .gallery-grid { grid-template-columns: 1fr; gap: 16px; }
+      .gallery-card { aspect-ratio: 3/4; }
+      .gallery-floating-cta { bottom: 20px; right: 20px; padding: 12px 20px; font-size: .66rem; }
+      footer .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .fullscreen-nav { width: 44px; height: 44px; }
+      .fullscreen-prev { left: 15px; }
+      .fullscreen-next { right: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Page Loader -->
+<div class="page-loader" id="page-loader">
+  <div class="loader-content">
+    <div class="loader-name">Afolashade Joy <span>Jubrilla</span></div>
+    <div class="loader-bar" id="loader-bar"></div>
+    <div class="loader-initials">AJJ</div>
+  </div>
+</div>
+
+<!-- Page Transition -->
+<div class="page-transition" id="page-transition">
+  <div class="transition-curtain" id="transition-curtain"></div>
+</div>
+
+<!-- Scroll Progress -->
+<div class="scroll-progress-bar" id="scroll-progress"></div>
+
+<div id="c-dot"></div><div id="c-ring"></div>
+
+  <header id="main-nav">
+  <a class="nav-logo" href="index.html">Afolashade Joy <b>Jubrilla</b></a>
+  <ul class="nav-links">
+    <li><a href="home.html">Home</a></li><li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="book.html">Book</a></li><li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li><li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">Let's Talk</a>
+  <button class="theme-tog" onclick="toggleTheme()"><span class="theme-icon">◐</span></button>
+  <button class="mob-tog" onclick="toggleMobileMenu()">☰</button>
+</header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header"><span>Navigation</span></div>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+    <a href="home.html"><span>Home</span></a>
+    <a href="portfolio.html"><span>Portfolio</span></a>
+    <a href="book.html"><span>Book</span></a>
+    <a href="testimonials.html"><span>Testimonials</span></a>
+    <a href="gallery.html" class="active"><span>Gallery</span><span class="active-dot"></span></a>
+    <a href="contact.html"><span>Contact</span></a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="gallery-hero">
+    <span class="hero-number">06</span>
+    <p class="eyebrow">Visual Archive</p>
+    <h1 class="display">Captured<br><em>Moments</em></h1>
+    <p class="lead">A curated collection of professional milestones, speaking engagements, book features, and the journey across borders and industries.</p>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <h2>The <em>Journey</em> in Frames</h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Cards will be injected via JS -->
+    </div>
+  </section>
+
+  <!-- Fullscreen Gallery -->
+  <div class="gallery-fullscreen" id="fullscreenGallery">
+    <button class="fullscreen-close" onclick="closeFullscreen()">✕</button>
+    <img class="fullscreen-image" id="fullscreenImage" src="" alt="">
+    <button class="fullscreen-nav fullscreen-prev" onclick="navigateFullscreen(-1)">‹</button>
+    <button class="fullscreen-nav fullscreen-next" onclick="navigateFullscreen(1)">›</button>
+    <div class="fullscreen-counter" id="fullscreenCounter">01 / 11</div>
+    <div class="fullscreen-thumbnails" id="fullscreenThumbs"></div>
+  </div>
+
+  <!-- Floating CTA -->
+  <a href="#" class="gallery-floating-cta" onclick="openFullscreen(0); return false;">
+    <span>◈</span> View Gallery
+  </a>
+
+  <footer>
+    <div class="footer-grid">
+      <div><span class="footer-logo">Afolashade Joy <span>Jubrilla</span></span><p class="footer-tagline">KYC/AML · Cybersecurity · GRC · MBA, MA</p></div>
+      <div><span class="footer-col-title">Navigate</span><div class="footer-links"><a href="home.html">Home</a><a href="portfolio.html">Portfolio</a><a href="book.html">Book</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div></div>
+      <div><span class="footer-col-title">The Book</span><div class="footer-links"><a href="https://www.amazon.com/dp/B0G4DZVJ6S" target="_blank">Amazon</a><a href="https://selar.com/surviving-ai-recession" target="_blank">Selar</a></div></div>
+      <div><span class="footer-col-title">Connect</span><div class="footer-links"><a href="mailto:jubrillaafolashade@gmail.com">Email</a><a href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank">LinkedIn</a></div></div>
+    </div>
+    <div class="footer-bottom"><span class="footer-copy">© 2025 Afolashade Joy Jubrilla.</span><div class="footer-socials"><a href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank" aria-label="LinkedIn"><span class="footer-social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span></a><a href="mailto:jubrillaafolashade@gmail.com" aria-label="Email"><span class="footer-social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span></a></div></div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Gallery Data
+    const galleryData = [
+      { src: 'images/shady1.jpg', title: 'Professional Profile', category: 'Corporate' },
+      { src: 'images/shady2.jpg', title: 'Global Experience', category: 'International' },
+      { src: 'images/shady3.jpg', title: 'Current Role', category: 'Eurail' },
+      { src: 'images/sky-bank.jpg', title: 'Banking Sector', category: 'Finance' },
+      { src: 'images/book-cover.JPG', title: 'Published Author', category: 'Book Launch' },
+      { src: 'images/Review.jpeg', title: 'Media Feature', category: 'Press' },
+      { src: 'images/Review2.jpeg', title: 'Expert Opinion', category: 'Thought Leadership' },
+      { src: 'images/africa.jpg', title: 'Academic Research', category: 'Publication' },
+      { src: 'images/amazon-review1.JPG', title: 'Reader Impact', category: 'Reviews' },
+      { src: 'images/amazon-review2.JPG', title: 'Global Reach', category: 'Amazon' },
+      { src: 'images/amazon-review3.JPG', title: 'Continued Journey', category: 'Recognition' }
+    ];
+
+    // Generate Gallery Cards
+    const galleryGrid = document.getElementById('galleryGrid');
+    galleryData.forEach((item, index) => {
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      card.onclick = () => openFullscreen(index);
+      card.innerHTML = `
+        <img src="${item.src}" alt="${item.title}" loading="lazy">
+        <span class="gallery-card-number">${String(index + 1).padStart(2, '0')}</span>
+        <div class="gallery-card-overlay">
+          <h3 class="gallery-card-title">${item.title}</h3>
+          <span class="gallery-card-category">${item.category}</span>
+        </div>
+      `;
+      galleryGrid.appendChild(card);
+    });
+
+    // Generate Thumbnails
+    const thumbsContainer = document.getElementById('fullscreenThumbs');
+    galleryData.forEach((item, index) => {
+      const thumb = document.createElement('img');
+      thumb.className = 'thumb';
+      thumb.src = item.src;
+      thumb.alt = item.title;
+      thumb.onclick = () => openFullscreen(index);
+      thumbsContainer.appendChild(thumb);
+    });
+
+    // Fullscreen Functions
+    let currentIndex = 0;
+    const fullscreenGallery = document.getElementById('fullscreenGallery');
+    const fullscreenImage = document.getElementById('fullscreenImage');
+    const fullscreenCounter = document.getElementById('fullscreenCounter');
+    const thumbs = document.querySelectorAll('.thumb');
+
+    function openFullscreen(index) {
+      currentIndex = index;
+      updateFullscreen();
+      fullscreenGallery.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFullscreen() {
+      fullscreenGallery.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigateFullscreen(direction) {
+      currentIndex = (currentIndex + direction + galleryData.length) % galleryData.length;
+      updateFullscreen();
+    }
+
+    function updateFullscreen() {
+      fullscreenImage.src = galleryData[currentIndex].src;
+      fullscreenCounter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(galleryData.length).padStart(2, '0')}`;
+      thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+      if (!fullscreenGallery.classList.contains('active')) return;
+      if (e.key === 'Escape') closeFullscreen();
+      if (e.key === 'ArrowLeft') navigateFullscreen(-1);
+      if (e.key === 'ArrowRight') navigateFullscreen(1);
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMobileMenu();
+      });
+    });
+
+    // GSAP Animations
+    // Hero entrance
+    gsap.from('.gallery-hero .eyebrow', { opacity: 0, y: 30, duration: 1, delay: 0.3, ease: 'power3.out' });
+    gsap.from('.gallery-hero .display', { opacity: 0, y: 50, duration: 1.2, delay: 0.5, ease: 'power3.out' });
+    gsap.from('.gallery-hero .lead', { opacity: 0, y: 30, duration: 1, delay: 0.8, ease: 'power3.out' });
+    gsap.from('.hero-number', { opacity: 0, scale: 0.8, duration: 1.5, delay: 0.2, ease: 'power3.out' });
+    gsap.from('.hero-scroll-hint', { opacity: 0, duration: 1, delay: 1.5 });
+
+    // Gallery cards scroll animation
+    const cards = document.querySelectorAll('.gallery-card');
+    cards.forEach((card, i) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        }
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('main-nav');
+      if (window.scrollY > 100) {
+        nav.classList.add('solid');
+      } else {
+        nav.classList.remove('solid');
+      }
+    });
+
+    // Custom cursor
+    const cDot = document.getElementById('c-dot');
+    const cRing = document.getElementById('c-ring');
+    let isHovering = false;
+
+    document.addEventListener('mousemove', (e) => {
+      gsap.to(cDot, { x: e.clientX, y: e.clientY, duration: 0.1 });
+      gsap.to(cRing, { x: e.clientX, y: e.clientY, duration: 0.3 });
+    });
+
+    document.querySelectorAll('a, button, .gallery-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { isHovering = true; document.body.classList.add('hc'); });
+      el.addEventListener('mouseleave', () => { isHovering = false; document.body.classList.remove('hc'); });
+    });
+
+    /* ── PAGE LOADER ───────────────────────────────────── */
+    (function() {
+      const loader = document.getElementById('page-loader');
+      const bar = document.getElementById('loader-bar');
+      const curtain = document.getElementById('transition-curtain');
+      if (!loader) return;
+      
+      const minDuration = 1800;
+      const startTime = performance.now();
+      
+      // Start the bar animation immediately
+      if (bar) bar.classList.add('loaded');
+      
+      function finishLoad() {
+        const elapsed = performance.now() - startTime;
+        const remaining = Math.max(0, minDuration - elapsed);
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          if (curtain && curtain.parentElement) {
+            setTimeout(() => {
+              curtain.style.transition = 'transform .8s cubic-bezier(.4,0,.2,1)';
+              curtain.style.transform = 'translateY(-100%)';
+              setTimeout(() => {
+                curtain.parentElement.style.display = 'none';
+              }, 800);
+            }, 300);
+          }
+        }, remaining);
+      }
+      
+      // Ensure loader always hides after 3 seconds max
+      const maxTimeout = setTimeout(() => {
+        loader.classList.add('hidden');
+        if (curtain && curtain.parentElement) {
+          curtain.parentElement.style.display = 'none';
+        }
+      }, 3000);
+      
+      if (document.readyState === 'complete') {
+        clearTimeout(maxTimeout);
+        finishLoad();
+      } else {
+        window.addEventListener('load', () => {
+          clearTimeout(maxTimeout);
+          finishLoad();
+        });
+      }
+    })();
+
+    /* ── SCROLL PROGRESS ──────────────────────────────── */
+    (function() {
+      const bar = document.getElementById('scroll-progress');
+      if (!bar) return;
+      window.addEventListener('scroll', () => {
+        const sy = window.scrollY;
+        const max = document.body.scrollHeight - window.innerHeight;
+        bar.style.transform = `scaleX(${sy / max})`;
+      }, { passive: true });
+    })();
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('active');
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    }
+  </script>
+</body>
+</html>
