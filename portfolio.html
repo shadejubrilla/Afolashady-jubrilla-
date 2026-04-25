@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio | Afolashade Joy Jubrilla</title>
+  <meta name="description" content="Afolashade Joy Jubrilla — Cybersecurity, GRC, KYC/AML professional. Author of Surviving the AI Recession. Google Cybersecurity Certificate · NIST CSF 2.0 · ISO 42001. Currently at Eurail, Netherlands.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -472,6 +473,12 @@
       .tl-card-peek { position: relative; width: 100%; height: 140px; left: auto; top: auto; margin-bottom: 16px; }
       .tl-card:hover { transform: translateY(-4px); }
       .sec-header { padding: 32px 28px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .skill-item { padding: 14px 16px; }
+      .skill-name { font-size: .65rem; }
+    }
+    @media(max-width:480px){
+      .skills-grid { grid-template-columns: 1fr; }
     }
     @media(min-width: 901px) {
       .tl-card { position: relative; padding: 28px 28px 28px 220px; display: block; min-height: 140px; }
@@ -504,10 +511,10 @@
 <header id="main-nav">
   <a class="nav-logo" href="index.html">Afolashade Joy <b>Jubrilla</b></a>
   <ul class="nav-links">
-    <li><a href="home.html">Home</a></li>
+<li><a href="home.html">Home</a></li>
     <li><a href="portfolio.html" class="active">Portfolio</a></li>
     <li><a href="book.html">Book</a></li>
-    <li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="resources.html">Knowledge Hub</a></li>
     <li><a href="gallery.html">Gallery</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -557,14 +564,14 @@
           <p class="eyebrow rv" style="margin-bottom:16px">Education</p>
           <div class="edu-cards">
             <div class="edu-card rv">
-              <span class="edu-deg">MBA · Human Resources Management</span>
+              <span class="edu-deg">MBA · Master of Business Administration</span>
               <div class="edu-title">Ladoke Akintola University of Technology</div>
               <div class="edu-inst">Software Engineering Institute · Nigeria</div>
             </div>
             <div class="edu-card rv d1">
-              <span class="edu-deg">MA · Governance & Development Policy</span>
-              <div class="edu-title">International Institute of Social Studies (ISS)</div>
-              <div class="edu-inst">Erasmus University · The Hague, Netherlands</div>
+              <span class="edu-deg">BA · Linguistics</span>
+              <div class="edu-title">Ekiti State University</div>
+              <div class="edu-inst">Nigeria</div>
             </div>
           </div>
           <div class="cert-band rv d2">
@@ -584,10 +591,41 @@
             <span class="fw-badge gold">EU 2021/782</span>
           </div>
         </div>
+        <!-- Tools & Technologies -->
+        <div style="margin-top:28px">
+          <p class="eyebrow rv d3" style="margin-bottom:16px">Tools & Technologies</p>
+          <div class="skills-grid" style="margin-top:0">
+            <div class="skill-item rv"><div class="skill-dot"></div><span class="skill-name">Python Security Automation</span></div>
+            <div class="skill-item rv d1"><div class="skill-dot"></div><span class="skill-name">SQL Data Auditing</span></div>
+            <div class="skill-item rv d2"><div class="skill-dot"></div><span class="skill-name">Linux/Bash</span></div>
+            <div class="skill-item rv d3"><div class="skill-dot"></div><span class="skill-name">tcpdump / Wireshark</span></div>
+            <div class="skill-item rv"><div class="skill-dot"></div><span class="skill-name">AI Act Compliance</span></div>
+            <div class="skill-item rv d1"><div class="skill-dot"></div><span class="skill-name">Google Cybersecurity</span></div>
+            <div class="skill-item rv d2"><div class="skill-dot"></div><span class="skill-name">ISO 9001</span></div>
+            <div class="skill-item rv d3"><div class="skill-dot"></div><span class="skill-name">PCI DSS</span></div>
+            <div class="skill-item rv"><div class="skill-dot"></div><span class="skill-name">GDPR / NIS2</span></div>
+            <div class="skill-item rv d1"><div class="skill-dot"></div><span class="skill-name">NIST CSF 2.0</span></div>
+          </div>
+        </div>
       </div>
       <!-- Timeline -->
       <div>
         <div class="timeline">
+
+          <!-- Outlier AI -->
+          <div class="tl-item tl-card rv">
+            <div class="tl-card-peek"><img src="images/work-space.jpg" alt="Outlier AI" style="filter:brightness(.75)"></div>
+            <div class="tl-dot"></div>
+            <span class="tl-date">March 2026 – Present · Remote · Global</span>
+            <div class="tl-role">AI Security Evaluator</div>
+            <div class="tl-org">Outlier AI <span class="tl-org-sep">·</span> Remote</div>
+            <ul class="tl-list">
+              <li>Evaluating large language model outputs for data leakage, prompt injection, and adversarial behaviour to ensure enterprise-grade model safety.</li>
+              <li>Authoring technical assessments directly supporting human oversight and cybersecurity requirements under the EU AI Act.</li>
+              <li>Identifying and documenting model vulnerabilities that pose risks to enterprise deployments in regulated industries.</li>
+              <li>Contributing to evaluation frameworks that inform model safety standards and deployment protocols.</li>
+            </ul>
+          </div>
 
           <!-- Eurail -->
           <div class="tl-item tl-card rv">
@@ -602,33 +640,6 @@
               <li>Drove cross-functional collaboration between claims, operations, and finance teams, sustaining high service quality under pressure.</li>
               <li>Translated EU regulatory requirements into actionable SOPs accessible to non-specialist team members.</li>
             </ul>
-          </div>
-
-          <!-- NABC -->
-          <div class="tl-item tl-card rv">
-            <div class="tl-card-peek"><img src="images/work-space.jpg" alt="NABC" style="filter:brightness(.75)"></div>
-            <div class="tl-dot"></div>
-            <span class="tl-date">Oct 2024 – Mar 2025 · The Hague, Netherlands</span>
-            <div class="tl-role">Project Officer — African Insight Desk</div>
-            <div class="tl-org">NABC (Netherlands–Africa Business Council) <span class="tl-org-sep">·</span> The Hague</div>
-            <ul class="tl-list">
-              <li>Delivered structured market-entry analyses and regulatory briefs across 10+ African markets, enabling member companies to make data-driven expansion decisions.</li>
-              <li>Revived a stalled client project by reorganising incomplete data into a clear, audit-ready proposal, completed ahead of schedule.</li>
-              <li>Improved project tracking and event coordination through consistent documentation updates on the DAPP website, reducing redundant inquiries by 30%.</li>
-              <li>Strengthened internal coordination with standardised research documentation and policy-aligned reporting templates.</li>
-            </ul>
-          </div>
-
-          <!-- ISS Education -->
-          <div class="tl-item rv">
-            <div class="tl-dot" style="background:rgba(200,169,110,.3)"></div>
-            <span class="tl-date">2023 – 2024 · The Hague, Netherlands</span>
-            <div class="tl-edu">
-              <span class="tl-edu-label">Education</span>
-              <div class="tl-edu-name">MA — Governance and Development Policy</div>
-              <div class="tl-edu-sub">International Institute of Social Studies (ISS), Erasmus University Rotterdam · The Hague, Netherlands</div>
-              <div class="tl-edu-sub" style="margin-top:8px;color:var(--muted)">Research focus: AI governance, inclusive development, political participation. Published 2 academic papers during this period.</div>
-            </div>
           </div>
 
           <!-- Polaris Bank -->
@@ -757,42 +768,42 @@
     </div>
     <div class="press-grid" style="margin-top:52px">
       <a class="press-card rv" href="https://guardian.ng/appointments/author-explores-how-businesses-can-survive-digital-disruption" target="_blank">
-        <div class="press-peek"><img src="images/the guardian2.jpeg" alt="Guardian Nigeria"></div>
+        <div class="press-peek"><img src="images/glit.jpeg" alt="Guardian Nigeria"></div>
         <span class="press-source">Guardian Nigeria</span>
         <div class="press-headline">Digital Disruption & Business Survival</div>
         <p class="press-excerpt">Feature article exploring strategies for organisations navigating digital disruption, automation, and the evolving role of leadership.</p>
         <span class="press-arrow">Read Article →</span>
       </a>
       <a class="press-card rv d1" href="https://www.tribuneonlineng.com/in-new-book-afolashade-jubrilla-says-future-belongs-to-those-who-who-stay-curious-flexible/amp/" target="_blank">
-        <div class="press-peek"><img src="images/amazon-review1.JPG" alt="Tribune"></div>
+        <div class="press-peek"><img src="images/tribune.jpg" alt="Tribune"></div>
         <span class="press-source">Tribune Online · Amazon Top 3</span>
         <div class="press-headline">Future Belongs to Those Who Stay Curious and Flexible</div>
         <p class="press-excerpt">Tribune feature on the book's core thesis — that curiosity and adaptability, not credentials, define relevance in the AI era.</p>
         <span class="press-arrow">Read Article →</span>
       </a>
       <a class="press-card rv d2" href="https://punchng.com/experts-urge-nigeria-to-embrace-ai-adoption/?amp" target="_blank">
-        <div class="press-peek"><img src="images/the nation.jpeg" alt="Punch Nigeria"></div>
+        <div class="press-peek"><img src="images/campuslive.jpg" alt="Punch Nigeria"></div>
         <span class="press-source">Punch Nigeria</span>
         <div class="press-headline">Experts Urge Nigeria to Embrace AI Adoption</div>
         <p class="press-excerpt">As AI Futures and Governance Reform Advocate, Afolashade Jubrilla calls for coordinated national AI strategy across fintech, healthcare, agriculture, and infrastructure.</p>
         <span class="press-arrow">Read Article →</span>
       </a>
       <a class="press-card rv" href="https://punchng.com/economy-at-risk-without-digital-shift-experts/" target="_blank">
-        <div class="press-peek"><img src="images/glit.jpeg" alt="Punch"></div>
+        <div class="press-peek"><img src="images/punch.JPG" alt="Punch"></div>
         <span class="press-source">Punch Nigeria · Dec 2025</span>
         <div class="press-headline">Economy at Risk Without Digital Shift</div>
         <p class="press-excerpt">"Certificates alone no longer guarantee employability, and longevity in a role no longer guarantees relevance. What matters is the ability to think critically, adapt quickly and work alongside intelligent systems."</p>
         <span class="press-arrow">Read Article →</span>
       </a>
       <a class="press-card rv d1" href="https://thenationonlineng.net/expert-seeks-shift-from-certificates-to-future-ready-skills/amp/" target="_blank">
-        <div class="press-peek"><img src="images/amazon-review2.JPG" alt="The Nation"></div>
+        <div class="press-peek"><img src="images/thisday.jpg" alt="The Nation"></div>
         <span class="press-source">The Nation Online</span>
         <div class="press-headline">Expert Seeks Shift from Certificates to Future-Ready Skills</div>
         <p class="press-excerpt">Raises concerns over Nigeria's outdated education system and the urgent need for future-ready skills frameworks aligned with digital economic realities.</p>
         <span class="press-arrow">Read Article →</span>
       </a>
       <a class="press-card rv d2" href="https://www.latestnigeriannews.com/d/138670/author-explores-how-businesses-can-survive-digital-disruption.html" target="_blank">
-        <div class="press-peek"><img src="images/amazon-review3.JPG" alt="Latest Nigerian News"></div>
+        <div class="press-peek"><img src="images/theguardian2.jpeg" alt="Latest Nigerian News"></div>
         <span class="press-source">Latest Nigerian News</span>
         <div class="press-headline">Author Explores How Businesses Can Survive Digital Disruption</div>
         <p class="press-excerpt">Syndicated feature highlighting insights into resilience, governance frameworks, and navigating digital transformation at the institutional level.</p>
@@ -877,13 +888,13 @@
   <div class="footer-grid">
     <div>
       <span class="footer-logo">Afolashade Joy <span>Jubrilla</span></span>
-      <p class="footer-tagline">KYC/AML · Cybersecurity · GRC · Operational Governance<br>MBA, MA · Currently at Eurail · Utrecht, Netherlands</p>
+      <p class="footer-tagline">Cybersecurity · GRC · KYC/AML · Operational Governance<br>Google Cybersecurity Certificate · NIST CSF 2.0 · MBA, MA · Eurail, Netherlands</p>
     </div>
     <div>
       <span class="footer-col-title">Navigate</span>
       <div class="footer-links">
         <a href="home.html">Home</a><a href="portfolio.html">Portfolio</a>
-        <a href="book.html">Book</a><a href="testimonials.html">Testimonials</a>
+        <a href="book.html">Book</a><a href="resources.html">Knowledge Hub</a>
         <a href="gallery.html">Gallery</a><a href="contact.html">Contact</a>
       </div>
     </div>

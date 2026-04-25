@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ['home.html', 'Home'],
       ['portfolio.html', 'Portfolio'],
       ['book.html', 'Book'],
-      ['testimonials.html', 'Testimonials'],
+      ['resources.html', 'Knowledge Hub'],
       ['gallery.html', 'Gallery'],
       ['contact.html', 'Contact']
     ];

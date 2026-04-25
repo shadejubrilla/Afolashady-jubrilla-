@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Hub | Afolashade Joy Jubrilla</title>
+  <meta name="description" content="Resources, insights, and guides on KYC/AML, Cybersecurity, GRC, and AI Governance. Expert knowledge from Afolashade Joy Jubrilla.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    /* Page Loader */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-content { text-align: center; }
+    .loader-name {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+    .loader-name span { display: inline-block; opacity: 0; transform: translateY(20px); }
+    .loader-bar {
+      width: 200px;
+      height: 1px;
+      background: var(--dim);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .loader-bar::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      height: 100%;
+      width: 0;
+      background: var(--gold);
+      transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .loader-bar.loaded::after { width: 100%; }
+    .loader-initials {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.15;
+      margin-top: 40px;
+    }
+
+    /* Scroll Progress */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+      z-index: 1001;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+
+    /* Hero */
+    .kh-hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 160px 6vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kh-hero::before {
+      content: 'KNOWLEDGE';
+      position: absolute;
+      right: 3vw;
+      bottom: -40px;
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 20rem);
+      font-weight: 700;
+      color: rgba(200,169,110,.035);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .kh-hero-sub {
+      font-size: .7rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .kh-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .kh-hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .kh-hero p {
+      font-size: 1rem;
+      color: var(--cream2);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* Featured Carousel */
+    .featured-section {
+      padding: 80px 0;
+      background: var(--bg2);
+      border-top: 1px solid var(--dim);
+      border-bottom: 1px solid var(--dim);
+    }
+    .featured-header {
+      padding: 0 6vw;
+      margin-bottom: 40px;
+    }
+    .featured-label {
+      font-size: .58rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .featured-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .featured-label span {
+      font-family: var(--font-display);
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .featured-wrapper {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 6vw;
+    }
+    .featured-track {
+      overflow: hidden;
+    }
+    .featured-slides {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .featured-slide {
+      flex: 0 0 100%;
+      padding: 0 10px;
+    }
+    .featured-card {
+      background: var(--bg3);
+      border: 1px solid var(--dim);
+      padding: 52px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 52px;
+      align-items: center;
+      position: relative;
+    }
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .featured-card:hover::before { height: 100%; }
+    .fc-tag {
+      display: inline-flex;
+      font-size: .55rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,169,110,.3);
+      padding: 6px 14px;
+      margin-bottom: 16px;
+    }
+    .fc-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .fc-excerpt {
+      font-size: .95rem;
+      color: var(--cream2);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .fc-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: gap .3s;
+    }
+    .fc-cta:hover { gap: 18px; }
+    .fc-image {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+    }
+    .fc-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) brightness(.8);
+      transition: filter .4s, transform .5s;
+    }
+    .featured-card:hover .fc-image img {
+      filter: grayscale(0%) brightness(.9);
+      transform: scale(1.03);
+    }
+    .fc-img-label {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: .55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--cream2);
+      background: rgba(6,6,9,.7);
+      padding: 6px 12px;
+    }
+    .featured-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .fc-dots { display: flex; gap: 10px; }
+    .fc-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dim);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .fc-dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+    .fc-arrow {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--dim);
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .fc-arrow:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Category Filter */
+    .filter-section {
+      padding: 60px 6vw;
+    }
+    .filter-label {
+      font-size: .58rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .filter-chip {
+      font-size: .65rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cream2);
+      border: 1px solid var(--dim);
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: all .3s;
+      background: transparent;
+    }
+    .filter-chip:hover,
+    .filter-chip.active {
+      color: var(--gold);
+      border-color: rgba(200,169,110,.3);
+      background: rgba(200,169,110,.05);
+    }
+
+    /* Resources Grid */
+    .resources-section {
+      padding: 0 6vw 100px;
+    }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .res-card {
+      background: var(--bg3);
+      border: 1px solid var(--dim);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .4s, border-color .4s;
+    }
+    .res-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--gold);
+      transition: height .5s var(--ease);
+    }
+    .res-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(200,169,110,.2);
+    }
+    .res-card:hover::before { height: 100%; }
+    .res-tag {
+      display: inline-flex;
+      font-size: .52rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .res-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .res-excerpt {
+      font-size: .85rem;
+      color: var(--cream2);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .res-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--dim);
+    }
+    .res-date {
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .res-link {
+      font-size: .6rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap .3s;
+    }
+    .res-link:hover { gap: 12px; }
+
+    /* Section Divider */
+    .res-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dim), transparent);
+      margin: 60px 0;
+    }
+
+    /* Article Modal */
+    .article-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+    .article-modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .am-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(6,6,9,.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .am-container {
+      position: relative;
+      width: 95%;
+      max-width: 900px;
+      max-height: 90vh;
+      background: var(--bg2);
+      border: 1px solid var(--dim);
+      overflow: hidden;
+      transform: translateY(40px) scale(.96);
+      transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .article-modal.open .am-container {
+      transform: translateY(0) scale(1);
+    }
+    .am-header {
+      position: relative;
+      padding: 36px 48px;
+      border-bottom: 1px solid var(--dim);
+      background: var(--bg3);
+    }
+    .am-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--dim);
+      color: var(--cream);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+    .am-close:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: rotate(90deg);
+    }
+    .am-tag {
+      display: inline-flex;
+      font-size: .52rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(200,169,110,.3);
+      padding: 5px 12px;
+      margin-bottom: 14px;
+    }
+    .am-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 700px;
+    }
+    .am-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    .am-meta span {
+      font-size: .6rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .am-meta span::before {
+      content: '·';
+      margin-right: 24px;
+      color: var(--dim);
+    }
+    .am-body {
+      padding: 48px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .am-body::-webkit-scrollbar {
+      width: 4px;
+    }
+    .am-body::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    .am-body::-webkit-scrollbar-thumb {
+      background: var(--dim);
+      border-radius: 2px;
+    }
+    .am-section {
+      margin-bottom: 36px;
+    }
+    .am-section:last-child {
+      margin-bottom: 0;
+    }
+    .am-section h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--gold);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--dim);
+    }
+    .am-section p {
+      font-size: .95rem;
+      color: var(--cream2);
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .am-section ul {
+      list-style: none;
+      margin: 16px 0;
+    }
+    .am-section li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      font-size: .9rem;
+      color: var(--cream2);
+      line-height: 1.7;
+    }
+    .am-section li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: .75rem;
+    }
+    .am-callout {
+      background: var(--bg);
+      border: 1px solid var(--dim);
+      border-left: 3px solid var(--gold);
+      padding: 24px 28px;
+      margin: 24px 0;
+    }
+    .am-callout p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin: 0;
+    }
+    .am-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--dim);
+    }
+    .am-tag-item {
+      font-size: .55rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--dim);
+      padding: 6px 12px;
+    }
+    .am-footer {
+      padding: 24px 48px;
+      border-top: 1px solid var(--dim);
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .am-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 12px 28px;
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+    .am-cta:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+    }
+    .am-nav-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .am-nav-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--dim);
+      background: transparent;
+      color: var(--cream);
+      font-size: .9rem;
+      cursor: pointer;
+      transition: all .3s ease;
+    }
+    .am-nav-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    @media (max-width: 900px) {
+      .kh-hero { min-height: 45vh; padding: 100px 5vw 50px; }
+      .kh-hero::before { font-size: 6rem; right: 0; }
+      .kh-hero h1 { font-size: 2.2rem; }
+      .kh-hero p { font-size: 0.9rem; }
+      
+      .featured-section { padding: 50px 0; }
+      .featured-header { padding: 0 5vw; margin-bottom: 28px; }
+      .featured-card { grid-template-columns: 1fr; gap: 20px; padding: 24px 20px; }
+      .fc-image { height: 180px; order: -1; }
+      .fc-tag { font-size: .48rem; padding: 4px 10px; }
+      .fc-title { font-size: 1.3rem; }
+      .fc-excerpt { font-size: .85rem; }
+      .fc-cta { font-size: .65rem; }
+      .fc-img-label { font-size: .5rem; padding: 4px 8px; }
+      .featured-nav { margin-top: 24px; }
+      
+      .filter-section { padding: 30px 5vw; }
+      .filter-label { font-size: .52rem; margin-bottom: 14px; }
+      .filter-chips { gap: 8px; }
+      .filter-chip { font-size: .58rem; padding: 8px 14px; }
+      
+      .resources-section { padding: 0 4vw 40px; }
+      .resources-grid { grid-template-columns: 1fr; gap: 12px; }
+      .res-card { padding: 24px 20px; }
+      .res-title { font-size: 1.1rem; }
+      .res-excerpt { font-size: .8rem; line-height: 1.6; }
+      .res-tag { font-size: .48rem; }
+      .res-date { font-size: .52rem; }
+      .res-link { font-size: .55rem; }
+      
+      /* Modal mobile */
+      .am-container { 
+        width: 100%; 
+        height: 100%; 
+        max-height: 100vh; 
+        border: none;
+        display: flex;
+        flex-direction: column;
+      }
+      .am-header { 
+        padding: 20px; 
+        flex-shrink: 0;
+      }
+      .am-close { 
+        top: 16px; 
+        right: 16px; 
+        width: 36px; 
+        height: 36px; 
+        font-size: 1rem; 
+      }
+      .am-tag { 
+        font-size: .45rem; 
+        padding: 3px 8px; 
+        margin-bottom: 10px;
+      }
+      .am-title { 
+        font-size: 1.2rem; 
+        line-height: 1.3;
+      }
+      .am-meta { 
+        flex-wrap: wrap; 
+        gap: 12px; 
+        margin-top: 12px;
+      }
+      .am-meta span { 
+        font-size: .52rem; 
+      }
+      .am-meta span::before { 
+        display: none;
+      }
+      .am-body { 
+        padding: 20px; 
+        max-height: none;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .am-section { 
+        margin-bottom: 24px; 
+      }
+      .am-section h4 { 
+        font-size: 1rem; 
+        margin-bottom: 10px;
+      }
+      .am-section p { 
+        font-size: .88rem; 
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .am-section li { 
+        font-size: .82rem; 
+        padding-left: 18px;
+        margin-bottom: 8px;
+      }
+      .am-callout { 
+        padding: 16px 18px; 
+        margin: 18px 0;
+      }
+      .am-callout p { 
+        font-size: .95rem; 
+      }
+      .am-footer { 
+        padding: 16px 20px; 
+        flex-direction: row;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+      .am-cta { 
+        font-size: .6rem; 
+        padding: 10px 16px; 
+      }
+      .am-nav-btns { gap: 8px; }
+      .am-nav-btn { 
+        width: 36px; 
+        height: 36px; 
+      }
+    }
+
+    @media (max-width: 480px) {
+      .kh-hero { padding: 90px 4vw 40px; }
+      .kh-hero h1 { font-size: 1.8rem; }
+      .kh-hero::before { font-size: 4rem; }
+      
+      .featured-card { padding: 18px 14px; }
+      .fc-image { height: 150px; }
+      .fc-title { font-size: 1.1rem; }
+      .fc-excerpt { font-size: .8rem; }
+      
+      .filter-chips { gap: 6px; }
+      .filter-chip { font-size: .52rem; padding: 6px 10px; }
+      
+      .res-card { padding: 18px 14px; }
+      .res-title { font-size: 1rem; }
+      .res-excerpt { font-size: .75rem; }
+      
+      .am-header { padding: 16px; }
+      .am-title { font-size: 1rem; }
+      .am-body { padding: 16px; }
+      .am-section h4 { font-size: .9rem; }
+      .am-section p { font-size: .82rem; }
+      .am-section li { font-size: .76rem; }
+      .am-footer { padding: 12px 16px; }
+      .am-cta { font-size: .55rem; padding: 8px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-name">
+        <span>A</span><span>F</span><span>O</span><span>J</span>
+      </div>
+      <div class="loader-bar"></div>
+      <div class="loader-initials">AFJ</div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <div id="c-dot"></div><div id="c-ring"></div>
+
+  <header id="main-nav">
+    <a class="nav-logo" href="index.html">Afolashade Joy <b>Jubrilla</b></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="book.html">Book</a></li>
+      <li><a href="resources.html" class="active">Knowledge Hub</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="home.html#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="home.html#contact">Let's Talk</a>
+    <button class="theme-tog" onclick="toggleTheme()"><span class="theme-icon">◐</span></button>
+    <button class="mob-tog" onclick="toggleMobileMenu()">☰</button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header"><span>Navigation</span></div>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+    <a href="home.html"><span>Home</span></a>
+    <a href="portfolio.html"><span>Portfolio</span></a>
+    <a href="book.html"><span>Book</span></a>
+    <a href="resources.html"><span>Knowledge Hub</span><span class="active-dot"></span></a>
+    <a href="gallery.html"><span>Gallery</span></a>
+    <a href="home.html#contact"><span>Contact</span></a>
+  </div>
+
+  <!-- Hero -->
+  <section class="kh-hero">
+    <p class="kh-hero-sub">Knowledge Hub</p>
+    <h1>Resources for<br><em>Governance Leaders.</em></h1>
+    <p>Expert insights, practical guides, and frameworks on Cybersecurity, GRC, KYC/AML, and AI Governance. Content built from operational experience and industry-leading standards.</p>
+  </section>
+
+  <!-- Featured Carousel -->
+  <section class="featured-section">
+    <div class="featured-header">
+      <p class="featured-label">Featured <span>— Editor's picks</span></p>
+    </div>
+    <div class="featured-wrapper">
+      <div class="featured-track">
+        <div class="featured-slides" id="featuredSlides">
+          <!-- Slide 1 -->
+          <div class="featured-slide">
+            <div class="featured-card">
+              <div class="fc-content">
+                <span class="fc-tag">GRC Framework</span>
+                <h3 class="fc-title">Building Audit-Ready Controls: A Practical Framework</h3>
+                <p class="fc-excerpt">Learn how to design GRC frameworks that don't just exist on paper but hold under regulatory scrutiny. This guide covers control mapping, evidence collection, and preparing for SOC 2, PCI DSS, and GDPR audits.</p>
+                <a class="fc-cta" href="#" data-article="audit-ready">Read Guide →</a>
+              </div>
+              <div class="fc-image">
+                <img src="images/shady3.jpg" alt="GRC Framework">
+                <span class="fc-img-label">Framework Design · 2026</span>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="featured-slide">
+            <div class="featured-card">
+              <div class="fc-content">
+                <span class="fc-tag">KYC/AML</span>
+                <h3 class="fc-title">KYC Due Diligence: From Basic to Enhanced</h3>
+                <p class="fc-excerpt">A structured breakdown of Know Your Customer processes — from standard onboarding to enhanced due diligence for high-risk profiles. Includes PEP screening protocols and transaction monitoring strategies.</p>
+                <a class="fc-cta" href="#" data-article="kyc-due-diligence">Read Guide →</a>
+              </div>
+              <div class="fc-image">
+                <img src="images/glit.jpeg" alt="KYC Due Diligence">
+                <span class="fc-img-label">Compliance · 2026</span>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="featured-slide">
+            <div class="featured-card">
+              <div class="fc-content">
+                <span class="fc-tag">AI Governance</span>
+                <h3 class="fc-title">ISO 42001: The AI Management System Standard</h3>
+                <p class="fc-excerpt">Understanding the world's first international standard for AI Management Systems — its structure, key requirements, controls framework, and certification pathway for organizations deploying AI.</p>
+                <a class="fc-cta" href="#" data-article="iso-42001">Read Guide →</a>
+              </div>
+              <div class="fc-image">
+                <img src="images/shady2.jpg" alt="AI Governance">
+                <span class="fc-img-label">AI Governance · 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="featured-nav">
+        <button class="fc-arrow" id="fcPrevBtn">←</button>
+        <div class="fc-dots" id="fcDots"></div>
+        <button class="fc-arrow" id="fcNextBtn">→</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter -->
+  <section class="filter-section">
+    <p class="filter-label">Filter by topic</p>
+    <div class="filter-chips">
+      <span class="filter-chip active" data-filter="all">All Topics</span>
+      <span class="filter-chip" data-filter="kyc">KYC/AML</span>
+      <span class="filter-chip" data-filter="cyber">Cybersecurity</span>
+      <span class="filter-chip" data-filter="grc">GRC</span>
+      <span class="filter-chip" data-filter="ai">AI Governance</span>
+      <span class="filter-chip" data-filter="risk">Risk Management</span>
+      <span class="filter-chip" data-filter="frameworks">Frameworks</span>
+    </div>
+  </section>
+
+  <!-- Resources Grid -->
+  <section class="resources-section">
+    <div class="resources-grid" id="resourcesGrid">
+      
+      <!-- Card 1 -->
+      <div class="res-card" data-category="kyc">
+        <span class="res-tag">KYC/AML</span>
+        <h4 class="res-title">Understanding Customer Due Diligence Levels</h4>
+        <p class="res-excerpt">A practical guide to determining CDD levels based on customer risk profiles, including simplified, standard, and enhanced due diligence protocols.</p>
+        <div class="res-meta">
+          <span class="res-date">Mar 2026</span>
+          <a class="res-link" href="#" data-article="cdd-levels">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="res-card" data-category="cyber">
+        <span class="res-tag">Cybersecurity</span>
+        <h4 class="res-title">NIST CSF 101: Mapping Your First Framework</h4>
+        <p class="res-excerpt">An introduction to the NIST Cybersecurity Framework — its five core functions (Identify, Protect, Detect, Respond, Recover) and how to apply them to your organization.</p>
+        <div class="res-meta">
+          <span class="res-date">Mar 2026</span>
+          <a class="res-link" href="#" data-article="nist-csf">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="res-card" data-category="grc">
+        <span class="res-tag">GRC</span>
+        <h4 class="res-title">Writing SOC 2-Ready Policies</h4>
+        <p class="res-excerpt">Step-by-step guidance on drafting information security policies that satisfy SOC 2 Trust Service Criteria without excessive bureaucracy.</p>
+        <div class="res-meta">
+          <span class="res-date">Feb 2026</span>
+          <a class="res-link" href="#" data-article="soc2-policies">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="res-card" data-category="ai">
+        <span class="res-tag">AI Governance</span>
+        <h4 class="res-title">ISO 42001: The AI Management System Standard</h4>
+        <p class="res-excerpt">Understanding the world's first international standard for AI Management Systems (AIMS) — its structure, key requirements, and certification pathway.</p>
+        <div class="res-meta">
+          <span class="res-date">Feb 2026</span>
+          <a class="res-link" href="#" data-article="iso-42001">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="res-card" data-category="grc">
+        <span class="res-tag">GRC</span>
+        <h4 class="res-title">Board-Level Risk Communication</h4>
+        <p class="res-excerpt">How to translate technical risk findings into board-ready narratives — frameworks, metrics, and storytelling techniques for governance audiences.</p>
+        <div class="res-meta">
+          <span class="res-date">Jan 2026</span>
+          <a class="res-link" href="#" data-article="board-risk">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="res-card" data-category="kyc">
+        <span class="res-tag">KYC/AML</span>
+        <h4 class="res-title">PEP Screening: A Practical Approach</h4>
+        <p class="res-excerpt">Politically Exposed Persons screening requires nuance. This guide covers database tools, red flags, and escalation protocols for high-risk accounts.</p>
+        <div class="res-meta">
+          <span class="res-date">Jan 2026</span>
+          <a class="res-link" href="#" data-article="pep-screening">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="res-card" data-category="risk">
+        <span class="res-tag">Risk Management</span>
+        <h4 class="res-title">Causal Risk in AI-Driven Financial Systems</h4>
+        <p class="res-excerpt">Understanding how artificial intelligence introduces non-linear risk vectors in algorithmic decision-making and the governance implications for financial institutions.</p>
+        <div class="res-meta">
+          <span class="res-date">2026</span>
+          <a class="res-link" href="#" data-article="causal-risk">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="res-card" data-category="frameworks">
+        <span class="res-tag">Frameworks</span>
+        <h4 class="res-title">GDPR Compliance: A Practical Overview</h4>
+        <p class="res-excerpt">A structured breakdown of GDPR requirements relevant to organizations processing EU resident data — lawful basis, data subject rights, and breach notification.</p>
+        <div class="res-meta">
+          <span class="res-date">2026</span>
+          <a class="res-link" href="#" data-article="gdpr">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="res-card" data-category="risk">
+        <span class="res-tag">Risk Management</span>
+        <h4 class="res-title">Data Governance in Data-Rich Environments</h4>
+        <p class="res-excerpt">Strategic frameworks for leveraging big data while maintaining robust governance structures, risk controls, and regulatory compliance across jurisdictions.</p>
+        <div class="res-meta">
+          <span class="res-date">2026</span>
+          <a class="res-link" href="#" data-article="data-governance">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Article Modal -->
+  <div class="article-modal" id="articleModal">
+    <div class="am-backdrop" onclick="closeArticleModal()"></div>
+    <div class="am-container">
+      <div class="am-header">
+        <button class="am-close" onclick="closeArticleModal()">✕</button>
+        <span class="am-tag" id="amTag">KYC/AML</span>
+        <h2 class="am-title" id="amTitle">Article Title</h2>
+        <div class="am-meta">
+          <span id="amDate">March 2026</span>
+          <span id="amReadTime">8 min read</span>
+        </div>
+      </div>
+      <div class="am-body" id="amBody"></div>
+      <div class="am-footer">
+        <a class="am-cta" href="home.html#contact">Work With Me →</a>
+        <div class="am-nav-btns">
+          <button class="am-nav-btn" onclick="prevArticle()">←</button>
+          <button class="am-nav-btn" onclick="nextArticle()">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <span class="footer-logo">Afolashade Joy <span>Jubrilla</span></span>
+        <p class="footer-tagline">KYC/AML · Cybersecurity · GRC · Operational Governance<br>MBA, MA · Currently at Eurail · Utrecht, Netherlands</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Navigate</span>
+        <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="book.html">Book</a>
+          <a href="resources.html">Knowledge Hub</a>
+          <a href="gallery.html">Gallery</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">The Book</span>
+        <div class="footer-links">
+          <a href="https://www.amazon.com/dp/B0G4DZVJ6S" target="_blank">Amazon (Global)</a>
+          <a href="https://selar.com/surviving-ai-recession" target="_blank">Selar (International)</a>
+        </div>
+        <span class="footer-col-title" style="margin-top:28px">Topics</span>
+        <div class="footer-links">
+          <a href="resources.html">KYC/AML</a>
+          <a href="resources.html">Cybersecurity</a>
+          <a href="resources.html">GRC Frameworks</a>
+          <a href="resources.html">AI Governance</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">Connect</span>
+        <div class="footer-links">
+          <a href="mailto:jubrillaafolashade@gmail.com">jubrillaafolashade@gmail.com</a>
+          <a href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Afolashade Joy Jubrilla. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank" aria-label="LinkedIn">
+          <span class="footer-social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span>
+        </a>
+        <a href="mailto:jubrillaafolashade@gmail.com" aria-label="Email">
+          <span class="footer-social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Page Loader
+    const pageLoader = document.getElementById('pageLoader');
+    const loaderBar = document.querySelector('.loader-bar');
+    const loaderSpans = document.querySelectorAll('.loader-name span');
+    
+    gsap.to(loaderSpans, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      delay: 0.3,
+      ease: 'power3.out',
+      onComplete: () => loaderBar.classList.add('loaded')
+    });
+    
+    setTimeout(() => {
+      pageLoader.classList.add('hidden');
+    }, 2200);
+
+    // Scroll Progress Bar
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgressBar.style.transform = `scaleX(${scrollTop / docHeight})`;
+    }, { passive: true });
+
+    // Featured Carousel
+    (function() {
+      const slides = document.getElementById('featuredSlides');
+      const dotsContainer = document.getElementById('fcDots');
+      const prevBtn = document.getElementById('fcPrevBtn');
+      const nextBtn = document.getElementById('fcNextBtn');
+      
+      if (!slides) return;
+      
+      const slideCount = slides.querySelectorAll('.featured-slide').length;
+      let currentSlide = 0;
+      let autoSlideInterval;
+      const autoSlideDelay = 6000;
+      
+      for (let i = 0; i < slideCount; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'fc-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      }
+      
+      const dots = dotsContainer.querySelectorAll('.fc-dot');
+      
+      function updateCarousel() {
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+      }
+      
+      function goToSlide(index) {
+        currentSlide = index;
+        updateCarousel();
+        resetAutoSlide();
+      }
+      
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        updateCarousel();
+      }
+      
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+        updateCarousel();
+        resetAutoSlide();
+      }
+      
+      function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+      }
+      
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+      
+      autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+    })();
+
+    // Filter Chips
+    (function() {
+      const chips = document.querySelectorAll('.filter-chip');
+      const cards = document.querySelectorAll('.res-card');
+      
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          
+          const filter = chip.dataset.filter;
+          
+          cards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    })();
+
+    // Theme toggle
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('active');
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Header scroll effect
+    const mainNav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      mainNav.classList.toggle('solid', window.scrollY > 50);
+    });
+
+    // Article Modal System
+    const articles = {
+      'cdd-levels': {
+        tag: 'KYC/AML',
+        title: 'Understanding Customer Due Diligence Levels',
+        date: 'March 2026',
+        readTime: '10 min read',
+        content: `
+          <div class="am-section">
+            <h4>Introduction</h4>
+            <p>Customer Due Diligence (CDD) is the cornerstone of any robust Anti-Money Laundering (AML) program. It establishes the baseline for knowing your customer, assessing risk, and building the evidence trail that regulators expect to see during examinations.</p>
+            <p>The level of due diligence applied must be proportional to the risk profile of the customer. Apply too little, and you expose your institution to financial crime. Apply too much without justification, and you create operational friction that drives legitimate customers away.</p>
+          </div>
+          <div class="am-section">
+            <h4>Three Tiers of Due Diligence</h4>
+            <ul>
+              <li><strong>Simplified Due Diligence (SDD)</strong> — Applied to low-risk customers and products. Requires basic identification verification and limited ongoing monitoring.</li>
+              <li><strong>Standard Due Diligence (SDD in practice)</strong> — The baseline for most retail and commercial customers. Full identity verification, purpose of relationship, and source of funds assessment.</li>
+              <li><strong>Enhanced Due Diligence (EDD)</strong> — Mandatory for high-risk customers including PEPs, high-risk jurisdictions, complex ownership structures, and unusual transaction patterns.</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"The quality of your CDD determines the quality of your AML program. Forms that are completed but not understood are liabilities, not controls."</p>
+          </div>
+          <div class="am-section">
+            <h4>CDD Documentation Requirements</h4>
+            <p>Every customer interaction must generate documentation that answers four questions:</p>
+            <ul>
+              <li>Who is this person? (Identity verification)</li>
+              <li>Why do they need this product or service? (Business purpose)</li>
+              <li>Where does their income or wealth come from? (Source of funds)</li>
+              <li>How will they use the product? (Intended activity)</li>
+            </ul>
+          </div>
+          <div class="am-section">
+            <h4>Common CDD Failures</h4>
+            <p>The most frequent examination findings relate to:</p>
+            <ul>
+              <li>Incomplete beneficial ownership information for legal entities</li>
+              <li>Failure to update CDD for existing customers when risk indicators emerge</li>
+              <li>Reliance on outdated or expired identification documents</li>
+              <li>Absence of documented rationale for risk rating decisions</li>
+            </ul>
+          </div>
+          <div class="am-section">
+            <h4>Key Takeaways</h4>
+            <p>CDD is not a checkbox exercise. It is an ongoing risk assessment that must evolve with the relationship. Train your frontline to recognize risk triggers, document their observations, and escalate when the profile doesn't fit the narrative.</p>
+          </div>
+        `
+      },
+      'nist-csf': {
+        tag: 'Cybersecurity',
+        title: 'NIST CSF 101: Building Your First Cybersecurity Framework',
+        date: 'March 2026',
+        readTime: '12 min read',
+        content: `
+          <div class="am-section">
+            <h4>What is NIST CSF?</h4>
+            <p>The NIST Cybersecurity Framework (CSF) provides a structured approach to managing cybersecurity risk. Originally developed for critical infrastructure, it has become the de facto standard for organizations of all sizes seeking to build repeatable, auditable security programs.</p>
+            <p>The framework's strength lies in its flexibility. It is not prescriptive about implementation — it provides a language for communicating risk and a structure for prioritizing investments.</p>
+          </div>
+          <div class="am-section">
+            <h4>The Five Core Functions</h4>
+            <ul>
+              <li><strong>Identify</strong> — Understand your assets, vulnerabilities, and risk tolerance. What are you protecting and why?</li>
+              <li><strong>Protect</strong> — Implement controls that reduce risk. Access management, training, data security.</li>
+              <li><strong>Detect</strong> — How do you know something has happened? Logging, monitoring, anomaly detection.</li>
+              <li><strong>Respond</strong> — What happens when an incident occurs? Containment, communication, recovery.</li>
+              <li><strong>Recover</strong> — Restoration of capabilities. Lessons learned, continuity planning.</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"You cannot protect what you cannot see. The Identify function is where most organizations start — and where many still fail."</p>
+          </div>
+          <div class="am-section">
+            <h4>Implementation Tiers</h4>
+            <p>NIST CSF defines four implementation tiers that describe the maturity of your cybersecurity program:</p>
+            <ul>
+              <li><strong>Tier 1: Partial</strong> — Informal processes, limited awareness of risk</li>
+              <li><strong>Tier 2: Risk-Informed</strong> — Policies approved but not consistently implemented</li>
+              <li><strong>Tier 3: Repeatable</strong> — Formally approved, consistently implemented, regularly updated</li>
+              <li><strong>Tier 4: Adaptive</strong> — Proactive risk management, continuous improvement</li>
+            </ul>
+          </div>
+          <div class="am-section">
+            <h4>Getting Started</h4>
+            <p>Begin with a current-state assessment against the framework. This reveals gaps and provides the roadmap for your security program. Many organizations start with Protect and Detect before realizing they have not adequately completed Identify.</p>
+          </div>
+        `
+      },
+      'soc2-policies': {
+        tag: 'GRC',
+        title: 'Writing SOC 2-Ready Policies That Hold</h4>',
+        date: 'February 2026',
+        readTime: '9 min read',
+        content: `
+          <div class="am-section">
+            <h4>The Policy Problem</h4>
+            <p>Most information security policies fail SOC 2 audits for one of two reasons: they were written by compliance teams without operational input, or they were written by technical teams who treated them as checkbox exercises.</p>
+            <p>A policy that exists but nobody follows is worse than no policy — it creates documented nonconformity. A policy that exists, is followed, and is documented constitutes evidence of control effectiveness.</p>
+          </div>
+          <div class="am-section">
+            <h4>The Anatomy of a Strong Policy</h4>
+            <ul>
+              <li><strong>Purpose Statement</strong> — Why does this policy exist? What risk does it address?</li>
+              <li><strong>Scope</strong> — Who does it apply to? What systems or data are covered?</li>
+              <li><strong>Roles and Responsibilities</strong> — Who owns the policy? Who enforces it?</li>
+              <li><strong>Requirements</strong> — What must personnel do? Use mandatory language: "shall," "must," "will."</li>
+              <li><strong>Exceptions</strong> — How are exceptions handled? Who approves them?</li>
+              <li><strong>Review Cycle</strong> — When is this policy reviewed and by whom?</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"The best policies are written for the reader, not the writer. If your policy requires a security expert to interpret it, your training program has already failed."</p>
+          </div>
+          <div class="am-section">
+            <h4>SOC 2 Trust Service Criteria Alignment</h4>
+            <p>Map each policy to the relevant Trust Service Criteria before drafting. Common policy requirements include:</p>
+            <ul>
+              <li>Security Policy → CC1 (Control Environment)</li>
+              <li>Access Control Policy → CC6 (Logical and Physical Access Controls)</li>
+              <li>Data Classification Policy → CC9 (Risk Mitigation)</li>
+              <li>Incident Response Policy → CC7 (Operations)</li>
+              <li>Change Management Policy → CC8 (System Operations)</li>
+            </ul>
+          </div>
+        `
+      },
+      'iso-42001': {
+        tag: 'AI Governance',
+        title: 'ISO 42001: The AI Management System Standard',
+        date: 'February 2026',
+        readTime: '14 min read',
+        content: `
+          <div class="am-section">
+            <h4>Introducing ISO 42001</h4>
+            <p>ISO/IEC 42001:2023 is the world's first international standard for AI Management Systems (AIMS). Published in December 2023, it establishes a structured framework for organizations that develop, deploy, or use AI systems.</p>
+            <p>The standard draws from the ISO High-Level Structure used by other management systems (ISO 27001, ISO 9001), making it easier for organizations with existing management systems to integrate AI governance.</p>
+          </div>
+          <div class="am-section">
+            <h4>Key Clauses</h4>
+            <ul>
+              <li><strong>Clause 4: Context of the Organization</strong> — Define internal and external factors affecting your AI systems</li>
+              <li><strong>Clause 5: Leadership</strong> — Top management commitment to AI policy and governance</li>
+              <li><strong>Clause 6: Planning</strong> — Risk assessment, AI objectives, and change planning</li>
+              <li><strong>Clause 7: Support</strong> — Resources, competence, awareness, communication</li>
+              <li><strong>Clause 8: Operation</strong> — AI system lifecycle management, impact assessments</li>
+              <li><strong>Clause 9: Performance Evaluation</strong> — Monitoring, internal audit, management review</li>
+              <li><strong>Clause 10: Improvement</strong> — Nonconformity, corrective action, continual improvement</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"ISO 42001 is not a technical standard for AI systems — it is a management standard for how organizations govern AI. The AI is incidental; the governance is the subject."</p>
+          </div>
+          <div class="am-section">
+            <h4>Annex A Controls</h4>
+            <p>Annex A contains 39 controls across 10 domains including Policies for AI, Internal Organization, Resources for AI Systems, AI System Life Cycle, Data for AI Systems, and Third-Party Relationships.</p>
+            <p>Organizations must conduct a risk assessment to determine which controls are applicable and document decisions in a Statement of Applicability.</p>
+          </div>
+          <div class="am-section">
+            <h4>Certification Pathway</h4>
+            <p>Certification involves an external audit by an accredited certification body. Most organizations require 6-12 months of AIMS operation before certification audit. The process validates that your AI governance is not theoretical — it is operational.</p>
+          </div>
+        `
+      },
+      'board-risk': {
+        tag: 'GRC',
+        title: 'Board-Level Risk Communication: A Field Guide',
+        date: 'January 2026',
+        readTime: '8 min read',
+        content: `
+          <div class="am-section">
+            <h4>The Communication Gap</h4>
+            <p>Boards receive thousands of risk data points. They remember none of them. CISOs and risk professionals consistently fail not in technical knowledge but in translation — converting technical risk into business narrative.</p>
+            <p>The board does not need to understand TCP/IP or AES-256. They need to understand three things: what could happen, how likely it is, and what it would cost.</p>
+          </div>
+          <div class="am-section">
+            <h4>The Risk Appetite Framework</h4>
+            <p>Start every board risk conversation with the organization's risk appetite. Define what risks are acceptable, which require escalation, and which are intolerable. This creates a decision-making framework that operates independently of technical detail.</p>
+            <ul>
+              <li>Risk Appetite Statement → What level of risk we accept</li>
+              <li>Key Risk Indicators (KRIs) → Are we within appetite?</li>
+              <li>Tolerance Thresholds → When does escalation occur?</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"If you cannot explain a risk in two sentences with the word 'because' somewhere in the middle, you do not understand it well enough to communicate it."</p>
+          </div>
+          <div class="am-section">
+            <h4>Presentation Best Practices</h4>
+            <ul>
+              <li>Lead with impact, not probability. "This could cost us €2.3M and reputational damage" before "CVSS score of 9.1."</li>
+              <li>Use analogies from domains the board understands. Cyber risk is analogous to operational, reputational, and financial risk.</li>
+              <li>Always provide a recommended action. Never present a problem without a proposed solution or decision.</li>
+              <li>Limit to three key messages. If you have more, you have not prioritized.</li>
+            </ul>
+          </div>
+        `
+      },
+      'pep-screening': {
+        tag: 'KYC/AML',
+        title: 'PEP Screening: Navigating High-Risk Relationships',
+        date: 'January 2026',
+        readTime: '11 min read',
+        content: `
+          <div class="am-section">
+            <h4>Understanding PEPs</h4>
+            <p>A Politically Exposed Person (PEP) is an individual entrusted with prominent public functions — heads of state, senior politicians, judicial officials, military commanders, and their immediate family members and close associates.</p>
+            <p>The risk is not that PEPs are inherently criminal. The risk is that their position creates exposure to corruption, embezzlement, and money laundering through third parties. They are high-risk by association with power.</p>
+          </div>
+          <div class="am-section">
+            <h4>Screening Requirements</h4>
+            <ul>
+              <li><strong>Initial Screening</strong> — At onboarding, against domestic and international PEP lists</li>
+              <li><strong>Ongoing Monitoring</strong> — Re-screening when news or events trigger a status change</li>
+              <li><strong>Enhanced Due Diligence (EDD)</strong> — Mandatory for all identified PEPs</li>
+              <li><strong>Senior Management Approval</strong> — Board-level or C-suite sign-off for PEP relationships</li>
+              <li><strong>Source of Wealth Assessment</strong> — Documented analysis of how wealth was accumulated</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"A PEP who becomes a head of government after onboarding requires immediate re-screening. Your AML system must trigger on political appointment events."</p>
+          </div>
+          <div class="am-section">
+            <h4>Red Flags</h4>
+            <ul>
+              <li>Reluctance to provide source of wealth documentation</li>
+              <li>Frequent changes to beneficial ownership structures</li>
+              <li>Transactions inconsistent with known sources of income</li>
+              <li>Preference for cash or cryptocurrency over traceable instruments</li>
+              <li>Use of shell companies in high-risk jurisdictions</li>
+            </ul>
+          </div>
+        `
+      },
+      'causal-risk': {
+        tag: 'Risk Management',
+        title: 'Causal Risk in AI-Driven Financial Systems',
+        date: '2026',
+        readTime: '15 min read',
+        content: `
+          <div class="am-section">
+            <h4>The Non-Linear Risk Problem</h4>
+            <p>Traditional financial risk models assume causality is linear and observable. Enter an AI system trained on historical data, and those assumptions break. AI identifies correlations across thousands of variables simultaneously — correlations that may not hold when market conditions shift.</p>
+            <p>The result is a new category of risk: causal risk, where AI-driven decisions create outcomes that are technically correct within the training distribution but catastrophically wrong in reality.</p>
+          </div>
+          <div class="am-section">
+            <h4>Sources of Causal Risk</h4>
+            <ul>
+              <li><strong>Distribution Shift</strong> — AI performs predictably within historical patterns; outside them, it extrapolates unpredictably</li>
+              <li><strong>Feedback Loops</strong> — AI trading systems that influence the data they learn from create recursive instability</li>
+              <li><strong>Adversarial Adaptation</strong> — Fraudulent actors who learn to exploit AI decision boundaries</li>
+              <li><strong>Opacity</strong> — Black-box models that cannot explain decisions, making root cause analysis impossible</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"The most dangerous AI risk is the one that looks most like success — high returns that collapse when conditions change."</p>
+          </div>
+          <div class="am-section">
+            <h4>Governance Implications</h4>
+            <p>Organizations deploying AI in credit, trading, or risk assessment must implement explainability requirements (as mandated by ISO 42001), conduct scenario stress testing beyond backtesting, and maintain human override mechanisms for high-stakes decisions.</p>
+          </div>
+        `
+      },
+      'gdpr': {
+        tag: 'Frameworks',
+        title: 'GDPR Compliance: A Practical Overview',
+        date: '2026',
+        readTime: '10 min read',
+        content: `
+          <div class="am-section">
+            <h4>GDPR at a Glance</h4>
+            <p>The General Data Protection Regulation (EU) 2016/679 governs the processing of personal data for EU residents. It applies to any organization that processes EU personal data, regardless of where the organization is based.</p>
+            <p>GDPR is not a checkbox compliance exercise. It establishes enforceable rights for individuals and creates significant liability for organizations that fail to protect personal data.</p>
+          </div>
+          <div class="am-section">
+            <h4>Core Principles</h4>
+            <ul>
+              <li><strong>Lawfulness, Fairness, Transparency</strong> — Process data only with valid legal basis</li>
+              <li><strong>Purpose Limitation</strong> — Collect for specified, explicit purposes only</li>
+              <li><strong>Data Minimization</strong> — Limit collection to what is necessary</li>
+              <li><strong>Accuracy</strong> — Keep data accurate and up to date</li>
+              <li><strong>Storage Limitation</strong> — Retain only as long as necessary</li>
+              <li><strong>Integrity and Confidentiality</strong> — Protect with appropriate security measures</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"The right to erasure (Article 17) is GDPR's most misunderstood provision. Deletion is not optional when a valid request is received — it is a legal obligation."</p>
+          </div>
+          <div class="am-section">
+            <h4>Breach Notification</h4>
+            <p>Data breaches must be reported to the supervisory authority within 72 hours of becoming aware. High-risk breaches require notification to affected individuals without undue delay. Failure to notify carries fines of up to €10M or 2% of global annual turnover.</p>
+          </div>
+        `
+      },
+      'data-governance': {
+        tag: 'Risk Management',
+        title: 'Data Governance in Data-Rich Environments',
+        date: '2026',
+        readTime: '12 min read',
+        content: `
+          <div class="am-section">
+            <h4>The Governance Paradox</h4>
+            <p>Data-rich environments create a paradox: the more data you have, the more valuable your analytics — and the harder it is to govern. Legacy data architectures accumulate technical and semantic debt. Data quality degrades. Lineage becomes opaque.</p>
+            <p>Organizations that have not invested in data governance face compounding risk: AI systems trained on poorly governed data produce unreliable outputs. The AI amplifies the quality problems, not the analytical value.</p>
+          </div>
+          <div class="am-section">
+            <h4>Data Governance Framework Components</h4>
+            <ul>
+              <li><strong>Data Inventory</strong> — What data do we hold? Where is it? Who owns it?</li>
+              <li><strong>Data Quality Standards</strong> — Accuracy, completeness, timeliness, consistency thresholds</li>
+              <li><strong>Data Lineage Mapping</strong> — End-to-end tracking from source to consumption</li>
+              <li><strong>Access Controls</strong> — Role-based access aligned with business function</li>
+              <li><strong>Retention Policies</strong> — Legal, regulatory, and operational retention requirements</li>
+              <li><strong>Data Steward Program</strong> — Named accountable individuals per data domain</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"Data governance is not an IT project. It is a business capability that IT enables but does not own."</p>
+          </div>
+          <div class="am-section">
+            <h4>AI-Specific Considerations</h4>
+            <p>AI systems require additional governance layers: training data provenance, model versioning, decision explainability, and bias monitoring. ISO 42001 Annex A.7 (Data for AI Systems) addresses these requirements specifically.</p>
+          </div>
+        `
+      },
+      'kyc-due-diligence': {
+        tag: 'KYC/AML',
+        title: 'KYC Due Diligence: From Onboarding to Ongoing Monitoring',
+        date: 'March 2026',
+        readTime: '13 min read',
+        content: `
+          <div class="am-section">
+            <h4>Beyond Onboarding</h4>
+            <p>Know Your Customer is often treated as an onboarding exercise. This is a critical misunderstanding. KYC is a living process — it evolves with the customer, the environment, and the risks they bring into the relationship.</p>
+            <p>Regulatory examination now routinely tests ongoing monitoring programs, not just onboarding controls. A robust KYC program has three phases: initial onboarding, periodic review, and continuous monitoring.</p>
+          </div>
+          <div class="am-section">
+            <h4>Onboarding Phase</h4>
+            <ul>
+              <li><strong>Identification</strong> — Verified identity documents, biometric matching where available</li>
+              <li><strong>Beneficial Ownership</strong> — For entities, map the ownership chain to natural persons</li>
+              <li><strong>Risk Rating</strong> — Assign risk tier based on customer type, jurisdiction, products, and channel</li>
+              <li><strong>Enhanced Due Diligence Triggers</strong> — Flag PEPs, sanctioned jurisdictions, complex structures</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"A risk rating assigned at onboarding but never revisited is a snapshot that becomes increasingly irrelevant. Life changes — and so does risk."</p>
+          </div>
+          <div class="am-section">
+            <h4>Ongoing Monitoring</h4>
+            <p>Monitor transaction activity against expected behavior. Implement alerts for threshold deviations, velocity anomalies, and behavioral drift. Trigger full file reviews when risk indicators emerge — not just when the periodic review calendar says so.</p>
+          </div>
+        `
+      },
+      'audit-ready': {
+        tag: 'GRC Framework',
+        title: 'Building Audit-Ready Controls: A Practical Framework',
+        date: '2026',
+        readTime: '11 min read',
+        content: `
+          <div class="am-section">
+            <h4>The Audit Readiness Problem</h4>
+            <p>Organizations spend months building security programs, then scramble for weeks before an audit to reconstruct evidence. Audit readiness should be a continuous state, not a periodic event.</p>
+            <p>The difference between a compliant organization and an audit-ready organization is documentation discipline. Audit-ready organizations document controls as they operate — not after the fact.</p>
+          </div>
+          <div class="am-section">
+            <h4>Control Evidence Architecture</h4>
+            <ul>
+              <li><strong>Design Documentation</strong> — Policy, procedure, and control description before implementation</li>
+              <li><strong>Operational Evidence</strong> — Logs, screenshots, reports generated during control operation</li>
+              <li><strong>Review Documentation</strong> — Evidence that someone reviewed and validated the control output</li>
+              <li><strong>Exception Documentation</strong> — When controls fail or deviate, how was it handled?</li>
+            </ul>
+          </div>
+          <div class="am-callout">
+            <p>"The question auditors ask is not 'did you have a firewall?' The question is 'how do I know it was running on March 15th at 3:47 AM when this access occurred?'"</p>
+          </div>
+          <div class="am-section">
+            <h4>SOC 2, PCI DSS, and GDPR</h4>
+            <p>Different frameworks emphasize different evidence types. SOC 2 prioritizes logical access logs and change management. PCI DSS focuses on network segmentation and cardholder data environment controls. GDPR requires evidence of consent management and breach response. Build a control library that maps to all applicable frameworks.</p>
+          </div>
+        `
+      }
+    };
+
+    let currentArticleId = null;
+    let articleIds = Object.keys(articles);
+    let currentArticleIndex = 0;
+
+    function openArticle(articleId) {
+      const article = articles[articleId];
+      if (!article) return;
+
+      currentArticleId = articleId;
+      currentArticleIndex = articleIds.indexOf(articleId);
+
+      document.getElementById('amTag').textContent = article.tag;
+      document.getElementById('amTitle').textContent = article.title;
+      document.getElementById('amDate').textContent = article.date;
+      document.getElementById('amReadTime').textContent = article.readTime;
+      document.getElementById('amBody').innerHTML = article.content;
+
+      const modal = document.getElementById('articleModal');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeArticleModal() {
+      const modal = document.getElementById('articleModal');
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function prevArticle() {
+      currentArticleIndex = (currentArticleIndex - 1 + articleIds.length) % articleIds.length;
+      openArticle(articleIds[currentArticleIndex]);
+    }
+
+    function nextArticle() {
+      currentArticleIndex = (currentArticleIndex + 1) % articleIds.length;
+      openArticle(articleIds[currentArticleIndex]);
+    }
+
+    // Bind article clicks
+    document.querySelectorAll('[data-article]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openArticle(link.dataset.article);
+      });
+    });
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeArticleModal();
+    });
+  </script>
+</body>
+</html>

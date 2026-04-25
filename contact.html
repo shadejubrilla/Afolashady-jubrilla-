@@ -1,285 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Afolashade Joy Jubrilla</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Call | Afolashade Joy Jubrilla</title>
+  <meta name="description" content="Book a discovery call with Afolashade Joy Jubrilla — Cybersecurity, GRC, and compliance professional.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* ── PAGE LOADER ─────────────────────────────────── */
-    .page-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
+    :root {
+      --bg: #060609;
+      --bg2: #0c0c14;
+      --bg3: #111118;
+      --bg4: #16161f;
+      --gold: #c8a96e;
+      --gold-lt: #e2c98a;
+      --gold-dk: #8a6e42;
+      --cream: #f2ead8;
+      --cream2: #c4b89a;
+      --muted: #524e62;
+      --dim: #1e1c2a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+body {
       background: var(--bg);
+      color: var(--cream);
+    }
+
+    /* Header */
+    .bk-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 6vw;
+      transition: padding .5s ease;
+    }
+    .bk-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .bk-logo:hover { color: var(--gold); }
+    .bk-logo b { color: var(--gold); font-weight: 500; }
+    .theme-tog {
+      width: 42px;
+      height: 42px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      transition: opacity .6s ease;
-    }
-    .page-loader.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .loader-content {
-      text-align: center;
-    }
-    .loader-name {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 400;
-      color: var(--cream);
-      margin-bottom: 36px;
-      overflow: hidden;
-    }
-    .loader-name span { color: var(--gold); }
-    .loader-bar {
-      width: 180px;
-      height: 1px;
-      background: var(--dim);
-      position: relative;
-      overflow: hidden;
-      margin: 0 auto;
-    }
-    .load-anim::after {
-      content: '';
-      position: absolute;
-      left: 0; top: 0;
-      height: 100%;
-      width: 0;
-      background: var(--gold);
-      animation: load-fill 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    @keyframes load-fill { to{width:100%} }
-    .loader-initials {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      font-weight: 300;
+      border: 1px solid rgba(200,169,110,.25);
+      border-radius: 50%;
+      background: transparent;
       color: var(--gold);
-      opacity: 0.25;
-      margin-top: 48px;
+      font-size: 1.1rem;
+      cursor: none;
+      transition: all .3s ease;
     }
+    .theme-tog:hover { background: rgba(200,169,110,.08); border-color: var(--gold); }
 
-    /* ── PAGE TRANSITION ─────────────────────────────── */
-    .page-transition {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
+    /* Hero */
+    .bk-hero {
+      padding: 120px 6vw 60px;
+      text-align: center;
+      position: relative;
     }
-    .transition-curtain {
-      position: absolute;
-      inset: 0;
-      background: var(--bg);
-      transform: translateY(100%);
-    }
-    .transition-curtain::before {
-      content: '';
+    .bk-hero::before {
+      content: 'CALL';
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      animation: pulse-ring 1.2s ease-in-out infinite;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(6rem, 20vw, 18rem);
+      font-weight: 700;
+      color: rgba(200,169,110,.025);
+      pointer-events: none;
+      white-space: nowrap;
     }
-    @keyframes pulse-ring {
-      0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
-      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    .bk-hero-tag {
+      font-size: .6rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bk-hero-tag::before, .bk-hero-tag::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .bk-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 400;
+      color: #faf8f2;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .bk-hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .bk-hero p {
+      font-size: .95rem;
+      color: var(--cream2);
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.75;
     }
 
-    /* ── SCROLL PROGRESS ────────────────────────────── */
-    .scroll-progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
-      z-index: 1001;
-      transform-origin: left;
-      transform: scaleX(0);
+    /* Booking Section */
+    .bk-section {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 40px 6vw 80px;
+    }
+
+    /* Calendar */
+    .cal-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--dim);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .cal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #faf8f2;
+    }
+    .cal-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .cal-nav-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--dim);
+      background: transparent;
+      color: var(--cream);
+      cursor: none;
+      transition: all .3s ease;
+      font-size: .9rem;
+    }
+    .cal-nav-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+    }
+    .cal-day-label {
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      padding: 8px 0;
+    }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      color: var(--cream2);
+      cursor: none;
+      transition: all .3s ease;
+      border: 1px solid transparent;
+      background: transparent;
+    }
+    .cal-day:hover:not(.disabled):not(.past) {
+      background: rgba(200,169,110,.1);
+      border-color: rgba(200,169,110,.2);
+      color: var(--gold);
+    }
+    .cal-day.selected {
+      background: var(--gold);
+      color: var(--bg);
+      font-weight: 500;
+    }
+    .cal-day.today {
+      border-color: rgba(200,169,110,.4);
+    }
+    .cal-day.disabled, .cal-day.past {
+      color: var(--muted);
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .cal-day.empty {
+      cursor: default;
+    }
+    .cal-day.weekend {
+      color: var(--muted);
+      opacity: 0.6;
+    }
+    .cal-day.weekend.available {
+      opacity: 0.8;
+    }
+
+    /* Light Theme */
+    [data-theme="light"] {
+      --bg: #f7f5f0;
+      --bg2: #efe9e0;
+      --bg3: #e8e2d8;
+      --bg4: #e2dbd0;
+      --cream: #1a1915;
+      --cream2: #4a4840;
+      --muted: #8a877d;
+      --dim: #d8d4cc;
+      --gold: #9c7a3c;
+      --gold-lt: #b8944f;
+      --gold-dk: #755c2c;
+    }
+
+    /* Selected Date Display */
+    .selected-date-display {
+      text-align: center;
+      padding: 20px;
+      background: var(--bg3);
+      border: 1px solid var(--dim);
+      margin-bottom: 24px;
+      display: none;
+    }
+    .selected-date-display.show {
+      display: block;
+    }
+    .sdd-label {
+      font-size: .55rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .sdd-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    /* Message Field */
+    .msg-wrap {
+      margin-bottom: 24px;
+    }
+    .msg-label {
+      display: block;
+      font-size: .6rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .msg-textarea {
       width: 100%;
+      min-height: 140px;
+      background: transparent;
+      border: 1px solid var(--dim);
+      padding: 16px;
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-size: .9rem;
+      font-weight: 300;
+      resize: vertical;
+      outline: none;
+      transition: border-color .3s ease;
+    }
+    .msg-textarea::placeholder { color: var(--muted); }
+    .msg-textarea:focus { border-color: var(--gold); }
+
+    /* CTA Button */
+    .bk-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 18px 32px;
+      background: var(--gold);
+      color: var(--bg);
+      font-family: 'Jost', sans-serif;
+      font-size: .75rem;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: none;
+      transition: all .3s ease;
+    }
+    .bk-cta:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+    }
+    .bk-cta:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .bk-cta svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
 
-    .contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:96px;min-height:100vh;padding:160px 6vw 96px;align-items:start;position:relative}
-    .ci-items{display:flex;flex-direction:column;gap:32px;margin-top:44px}
-    .ci-lbl{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:5px;display:block}
-    .ci-val{font-size:.98rem;color:var(--cream);text-decoration:none;font-weight:300;transition:color .3s}
-    a.ci-val:hover{color:var(--gold)}
-    .inquiry-types{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px}
-    .inq-type{background:var(--bg3);border:1px solid var(--dim);padding:20px 22px;transition:border-color .3s,background .3s;cursor:default}
-    .inq-type:hover{background:rgba(200,169,110,.03);border-color:rgba(200,169,110,.2)}
-    .inq-icon{font-size:.7rem;color:var(--gold);margin-bottom:6px;display:block;letter-spacing:.1em}
-    .inq-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream2)}
-    @media(max-width:900px){.contact-wrap{grid-template-columns:1fr;gap:56px;padding:120px 5vw 72px}.inquiry-types{grid-template-columns:1fr}}
+    /* Availability Note */
+    .bk-avail {
+      text-align: center;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .avail-dot {
+      width: 8px;
+      height: 8px;
+      background: #3ecf8e;
+      border-radius: 50%;
+      position: relative;
+    }
+    .avail-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px solid rgba(62,207,142,.4);
+      border-radius: 50%;
+      animation: pulse-avail 2s infinite;
+    }
+    @keyframes pulse-avail {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0; transform: scale(1.5); }
+    }
+    .avail-text {
+      font-size: .72rem;
+      color: var(--cream2);
+    }
+
+    /* Footer */
+    .bk-footer {
+      text-align: center;
+      padding: 40px 6vw;
+      border-top: 1px solid var(--dim);
+    }
+    .bk-footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .bk-footer-links a {
+      font-size: .7rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .3s ease;
+    }
+    .bk-footer-links a:hover { color: var(--gold); }
+    .bk-copy {
+      font-size: .65rem;
+      color: var(--muted);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .cal-wrap { padding: 20px; }
+      .cal-day { font-size: .7rem; }
+      .bk-hero { padding: 120px 5vw 40px; }
+      .bk-section { padding: 20px 5vw 60px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- Page Loader -->
-<div class="page-loader" id="page-loader">
-  <div class="loader-content">
-    <div class="loader-name">Afolashade Joy <span>Jubrilla</span></div>
-    <div class="loader-bar" id="loader-bar"></div>
-    <div class="loader-initials">AJJ</div>
-  </div>
-</div>
+  <div id="c-dot"></div>
+  <div id="c-ring"></div>
 
-<!-- Page Transition -->
-<div class="page-transition" id="page-transition">
-  <div class="transition-curtain" id="transition-curtain"></div>
-</div>
+  <header class="bk-header" style="background: var(--bg); border-bottom: 1px solid var(--dim); padding: 16px 6vw;">
+    <a class="bk-logo" href="home.html">Afolashade Joy <b>Jubrilla</b></a>
+    <ul class="nav-links" style="display: flex; gap: 24px; list-style: none; margin: 0; padding: 0;">
+      <li><a href="home.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Home</a></li>
+      <li><a href="portfolio.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Portfolio</a></li>
+      <li><a href="book.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Book</a></li>
+      <li><a href="resources.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Knowledge Hub</a></li>
+      <li><a href="gallery.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Gallery</a></li>
+      <li><a href="contact.html" class="active" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); text-decoration: none;">Contact</a></li>
+    </ul>
+    <button class="theme-tog" onclick="toggleTheme()"><span class="theme-icon">◐</span></button>
+  </header>
 
-<!-- Scroll Progress -->
-<div class="scroll-progress-bar" id="scroll-progress"></div>
+  <style>
+    .nav-links a:hover { color: var(--gold) !important; }
+    @media (max-width: 900px) {
+      .bk-header .nav-links { display: none; }
+      .bk-header { padding: 16px 5vw !important; }
+    }
+  </style>
 
-<div id="c-dot"></div><div id="c-ring"></div>
-<header id="main-nav">
-  <a class="nav-logo" href="index.html">Afolashade Joy <b>Jubrilla</b></a>
-  <ul class="nav-links">
-    <li><a href="home.html">Home</a></li><li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="book.html">Book</a></li><li><a href="testimonials.html">Testimonials</a></li>
-    <li><a href="gallery.html">Gallery</a></li><li><a href="contact.html" class="active">Contact</a></li>
-  </ul>
-  <a class="nav-cta" href="contact.html">Let's Talk</a>
-  <button class="theme-tog" onclick="toggleTheme()"><span class="theme-icon">◐</span></button>
-  <button class="mob-tog" onclick="toggleMobileMenu()">☰</button>
-</header>
+  <section class="bk-hero">
+    <p class="bk-hero-tag">Discovery Call</p>
+    <h1>Book a Call That<br><em>Matters.</em></h1>
+    <p>Select a date below and share what you'd like to discuss. I'll confirm within 48 hours.</p>
+  </section>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-header"><span>Navigation</span></div>
-  <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
-  <a href="home.html"><span>Home</span></a>
-  <a href="portfolio.html"><span>Portfolio</span></a>
-  <a href="book.html"><span>Book</span></a>
-  <a href="testimonials.html"><span>Testimonials</span></a>
-  <a href="gallery.html"><span>Gallery</span></a>
-  <a href="contact.html"><span>Contact</span><span class="active-dot"></span></a>
-</div>
-
-<div class="contact-wrap">
-  <div class="deco-l"></div><div class="deco-r"></div>
-  <div>
-    <p class="eyebrow rv">Let's Talk</p>
-    <h1 class="display rv d1">If you're building<br>a <em>GRC or cyber</em><br>function that holds —</h1>
-    <p class="lead rv d2" style="margin-top:18px;font-size:.9rem;max-width:360px">I reply thoughtfully to every serious inquiry. Compliance consulting, cybersecurity governance, speaking, and mentorship.</p>
-    <div class="ci-items">
-      <div class="rv"><span class="ci-lbl">Email</span><a class="ci-val" href="mailto:jubrillaafolashade@gmail.com">jubrillaafolashade@gmail.com</a></div>
-      <div class="rv d1"><span class="ci-lbl">LinkedIn</span><a class="ci-val" href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank">Afolashade Jubrilla (MBA, MA)</a></div>
-      <div class="rv d2"><span class="ci-lbl">Location</span><span class="ci-val">The Randstad, Netherlands</span></div>
-    </div>
-    <div style="margin-top:32px" class="rv d2">
-      <p class="eyebrow" style="margin-bottom:16px">I'm Open To</p>
-      <div class="inquiry-types">
-        <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">GRC Consulting</div></div>
-        <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Cybersecurity Governance</div></div>
-        <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Speaking Engagements</div></div>
-        <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Mentorship</div></div>
-        <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Compliance Frameworks</div></div>
-        <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Media & Press</div></div>
+  <div class="bk-section">
+    <!-- Calendar -->
+    <div class="cal-wrap">
+      <div class="cal-header">
+        <span class="cal-title" id="calMonthYear">April 2026</span>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" id="calPrev">←</button>
+          <button class="cal-nav-btn" id="calNext">→</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calGrid">
+        <div class="cal-day-label">Sun</div>
+        <div class="cal-day-label">Mon</div>
+        <div class="cal-day-label">Tue</div>
+        <div class="cal-day-label">Wed</div>
+        <div class="cal-day-label">Thu</div>
+        <div class="cal-day-label">Fri</div>
+        <div class="cal-day-label">Sat</div>
       </div>
     </div>
-    <div class="avail-box rv d3">
-      <p class="avail-text"><span class="avail-dot"></span><strong>Available for consulting & speaking</strong><br>Open to governance, GRC, and cybersecurity projects internationally. Response within 48 hours.</p>
-    </div>
-  </div>
-  <div class="rv d2">
-    <div class="form-row">
-      <div><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Full name"></div>
-      <div><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="you@example.com"></div>
-    </div>
-    <div class="form-row">
-      <div><label class="form-label">Organisation</label><input class="form-input" type="text" placeholder="Company / Institution"></div>
-      <div><label class="form-label">Inquiry Type</label><input class="form-input" type="text" placeholder="GRC · Cybersecurity · Speaking · Other"></div>
-    </div>
-    <div class="form-group"><label class="form-label">Your Message</label><textarea class="form-textarea" placeholder="Tell me about your project — what you're building, where the gaps are, and what a successful outcome looks like..."></textarea></div>
-    <div class="form-submit"><a class="btn" href="#"><span>Send Message →</span></a><p class="form-note">Every message read personally.<br>Response within 48 hours.</p></div>
-  </div>
-</div>
 
-<footer>
-  <div class="footer-grid">
-    <div><span class="footer-logo">Afolashade Joy <span>Jubrilla</span></span><p class="footer-tagline">KYC/AML · Cybersecurity · GRC · Operational Governance<br>MBA, MA · Currently at Eurail · Utrecht, Netherlands</p></div>
-    <div><span class="footer-col-title">Navigate</span><div class="footer-links"><a href="home.html">Home</a><a href="portfolio.html">Portfolio</a><a href="book.html">Book</a><a href="testimonials.html">Testimonials</a><a href="gallery.html">Gallery</a><a href="contact.html">Contact</a></div></div>
-    <div><span class="footer-col-title">The Book</span><div class="footer-links"><a href="https://www.amazon.com/dp/B0G4DZVJ6S" target="_blank">Amazon</a><a href="https://selar.com/surviving-ai-recession" target="_blank">Selar</a></div></div>
-    <div><span class="footer-col-title">Connect</span><div class="footer-links"><a href="mailto:jubrillaafolashade@gmail.com">Email</a><a href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank">LinkedIn</a></div></div>
+    <!-- Selected Date Display -->
+    <div class="selected-date-display" id="selectedDateDisplay">
+      <div class="sdd-label">Selected Date</div>
+      <div class="sdd-date" id="selectedDateText"></div>
+    </div>
+
+    <!-- Message -->
+    <div class="msg-wrap">
+      <label class="msg-label">What would you like to discuss?</label>
+      <textarea class="msg-textarea" id="messageInput" placeholder="Share your goals, challenges, or questions — the more context you provide, the more prepared I am for our call."></textarea>
+    </div>
+
+    <!-- CTA -->
+    <a class="bk-cta" id="sendBtn" href="#">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      <span id="ctaText">Send Request</span>
+    </a>
+
+    <!-- Availability -->
+    <div class="bk-avail">
+      <div class="avail-dot"></div>
+      <span class="avail-text">Available for calls & async communication</span>
+    </div>
   </div>
-  <div class="footer-bottom"><span class="footer-copy">© 2025 Afolashade Joy Jubrilla. All rights reserved.</span><div class="footer-socials"><a href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank" aria-label="LinkedIn"><span class="footer-social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span></a><a href="mailto:jubrillaafolashade@gmail.com" aria-label="Email"><span class="footer-social-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span></a></div></div>
-</footer>
-<script src="js/main.js"></script>
-<script>
-  /* ── PAGE LOADER ───────────────────────────────────── */
-  (function() {
-    const loader = document.getElementById('page-loader');
-    const bar = document.getElementById('loader-bar');
-    const curtain = document.getElementById('transition-curtain');
-    
-    if (!loader || !bar) return;
-    
-    const minDuration = 1800;
-    const startTime = performance.now();
-    
-    bar.classList.add('load-anim');
-    
-    function finishLoad() {
-      const elapsed = performance.now() - startTime;
-      const remaining = Math.max(0, minDuration - elapsed);
+
+  <footer class="bk-footer">
+    <div class="bk-footer-links">
+      <a href="home.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="book.html">Book</a>
+      <a href="resources.html">Knowledge Hub</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
+    <p class="bk-copy">© 2026 Afolashade Joy Jubrilla. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Calendar State
+    let currentDate = new Date();
+    let selectedDate = null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    // Render Calendar
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
       
-      setTimeout(() => {
-        document.body.classList.remove('loading');
-        loader.classList.add('hidden');
+      document.getElementById('calMonthYear').textContent = `${monthNames[month]} ${year}`;
+      
+      const calGrid = document.getElementById('calGrid');
+      calGrid.innerHTML = `
+        <div class="cal-day-label">Sun</div>
+        <div class="cal-day-label">Mon</div>
+        <div class="cal-day-label">Tue</div>
+        <div class="cal-day-label">Wed</div>
+        <div class="cal-day-label">Thu</div>
+        <div class="cal-day-label">Fri</div>
+        <div class="cal-day-label">Sat</div>
+      `;
+      
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      
+      // Empty cells for days before first day
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'cal-day empty';
+        calGrid.appendChild(empty);
+      }
+      
+      // Day cells
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayEl = document.createElement('div');
+        dayEl.className = 'cal-day';
+        dayEl.textContent = day;
         
-        setTimeout(() => {
-          curtain.style.transition = 'transform .8s cubic-bezier(.4,0,.2,1)';
-          curtain.style.transform = 'translateY(-100%)';
-          
-          setTimeout(() => {
-            curtain.parentElement.style.display = 'none';
-          }, 800);
-        }, 300);
-      }, remaining);
+        const dayOfWeek = new Date(year, month, day).getDay();
+        if (dayOfWeek === 0 || dayOfWeek === 6) {
+          dayEl.classList.add('weekend');
+        }
+        
+        const dateObj = new Date(year, month, day);
+        dateObj.setHours(0, 0, 0, 0);
+        
+        if (dateObj < today) {
+          dayEl.classList.add('disabled', 'past');
+        } else {
+          const maxDate = new Date(today);
+          maxDate.setMonth(maxDate.getMonth() + 6);
+          if (dateObj > maxDate) {
+            dayEl.classList.add('disabled');
+          } else {
+            dayEl.classList.add('available');
+            dayEl.onclick = () => selectDate(day, month, year);
+          }
+        }
+        
+        if (dateObj.getTime() === today.getTime()) {
+          dayEl.classList.add('today');
+        }
+        
+        if (selectedDate) {
+          const selDateObj = new Date(selectedDate.year, selectedDate.month, selectedDate.day);
+          if (selDateObj.getTime() === dateObj.getTime()) {
+            dayEl.classList.add('selected');
+          }
+        }
+        
+        calGrid.appendChild(dayEl);
+      }
     }
-    
-    if (document.readyState === 'complete') {
-      finishLoad();
-    } else {
-      window.addEventListener('load', finishLoad);
+
+    function selectDate(day, month, year) {
+      selectedDate = { day, month, year };
+      const dateStr = new Date(year, month, day).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('selectedDateText').textContent = dateStr;
+      document.getElementById('selectedDateDisplay').classList.add('show');
+      renderCalendar();
     }
-    
-    setTimeout(finishLoad, 3000);
-  })();
 
-  /* ── SCROLL PROGRESS ──────────────────────────────── */
-  (function() {
-    const bar = document.getElementById('scroll-progress');
-    if (!bar) return;
-    
-    window.addEventListener('scroll', () => {
-      const sy = window.scrollY;
-      const max = document.body.scrollHeight - window.innerHeight;
-      bar.style.transform = `scaleX(${sy / max})`;
-    }, { passive: true });
-  })();
-  // Theme toggle
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', savedTheme);
-  function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  }
+    // Navigation
+    document.getElementById('calPrev').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    });
+    document.getElementById('calNext').addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    });
 
-  function toggleMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    if (!menu) return;
-    menu.classList.toggle('active');
-    document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
-  }
-</script>
-</body></html>
+    // Send Email
+    document.getElementById('sendBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const message = document.getElementById('messageInput').value.trim();
+      let subject = 'Discovery Call Request';
+      let body = '';
+      
+      if (selectedDate) {
+        const dateStr = new Date(selectedDate.year, selectedDate.month, selectedDate.day).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        subject = `Discovery Call Request: ${dateStr}`;
+        body += `Preferred Date: ${dateStr}\n\n`;
+      } else {
+        subject = 'Discovery Call Request';
+        body += 'Preferred Date: Not specified\n\n';
+      }
+      
+      if (message) {
+        body += `Message:\n${message}`;
+      } else {
+        body += 'Message: No message provided.';
+      }
+      
+      const mailto = `mailto:jubrillaafolashade@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+    });
+
+    // Theme Toggle
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    }
+
+    // Cursor
+    const cDot = document.getElementById('c-dot');
+    const cRing = document.getElementById('c-ring');
+    document.addEventListener('mousemove', (e) => {
+      cDot.style.left = e.clientX + 'px';
+      cDot.style.top = e.clientY + 'px';
+      cRing.style.left = e.clientX + 'px';
+      cRing.style.top = e.clientY + 'px';
+    });
+    
+    // Hover effects
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.matches('a, button, .cal-day.available, .theme-tog')) {
+        document.body.classList.add('hc');
+      }
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.matches('a, button, .cal-day.available, .theme-tog')) {
+        document.body.classList.remove('hc');
+      }
+    });
+
+    // Init
+    renderCalendar();
+  </script>
+</body>
+</html>

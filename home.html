@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home | Afolashade Joy Jubrilla</title>
-  <meta name="description" content="KYC/AML, Cybersecurity and GRC specialist. Author of Surviving the AI Recession. Currently at Eurail, Netherlands. ISS Erasmus · LAUTECH MBA.">
+  <meta name="description" content="Cybersecurity, GRC and KYC/AML specialist. Author of Surviving the AI Recession. Currently at Eurail, Netherlands. Google Cybersecurity Certificate · NIST CSF 2.0 · ISS Erasmus MBA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -256,6 +256,321 @@
     .bf { display: flex; align-items: flex-start; gap: 10px; font-size: .88rem; color: var(--cream2); line-height: 1.6; }
     .bf::before { content: '◆'; color: var(--gold); font-size: .48rem; margin-top: 6px; flex-shrink: 0; }
 
+    /* Testimonial Carousel */
+    .testimonial-section {
+      padding: 120px 0;
+      background: var(--bg2);
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.2;
+    }
+    .testimonial-wrapper {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 6vw;
+    }
+    .testimonial-track {
+      overflow: hidden;
+    }
+    .testimonial-slides {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .testimonial-slide {
+      flex: 0 0 100%;
+      padding: 0 20px;
+    }
+    .testimonial-card {
+      background: var(--bg3);
+      border: 1px solid var(--dim);
+      padding: 52px 48px;
+      text-align: center;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '❝';
+      position: absolute;
+      top: 20px;
+      left: 36px;
+      font-family: Georgia, serif;
+      font-size: 5rem;
+      color: rgba(200,169,110,.1);
+      line-height: 1;
+    }
+    .tc-stars {
+      color: var(--gold);
+      font-size: .8rem;
+      letter-spacing: 4px;
+      margin-bottom: 24px;
+    }
+    .tc-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+    .tc-sep {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 20px;
+    }
+    .tc-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .tc-role {
+      font-size: .62rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .tc-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--bg4);
+      border: 1px solid var(--dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .tc-initials {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--gold);
+    }
+    .testimonial-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 36px;
+    }
+    .tc-dots {
+      display: flex;
+      gap: 10px;
+    }
+    .tc-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dim);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .tc-dot.active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+    .tc-arrow {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--dim);
+      background: transparent;
+      color: var(--cream);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+    .tc-arrow:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Knowledge Hub Teaser */
+    .kh-teaser {
+      padding: 120px 6vw;
+      background: var(--bg2);
+      position: relative;
+    }
+    .kh-teaser::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.2;
+    }
+    .kh-teaser-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .kh-categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .kh-cat-card {
+      background: var(--bg3);
+      border: 1px solid var(--dim);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .4s, border-color .4s;
+    }
+    .kh-cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--gold);
+      transition: height .5s var(--ease);
+    }
+    .kh-cat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(200,169,110,.2);
+    }
+    .kh-cat-card:hover::before { height: 100%; }
+    .kh-cat-icon {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .kh-cat-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .kh-cat-desc {
+      font-size: .82rem;
+      color: var(--cream2);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .kh-cat-count {
+      font-size: .58rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 120px 6vw;
+      background: var(--bg);
+      position: relative;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.15;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .ci-items {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 36px;
+    }
+    .ci-lbl {
+      font-size: .58rem;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+      display: block;
+    }
+    .ci-val {
+      font-size: .95rem;
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color .3s;
+    }
+    a.ci-val:hover { color: var(--gold); }
+    .inquiry-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 32px;
+    }
+    .inq-type {
+      background: var(--bg3);
+      border: 1px solid var(--dim);
+      padding: 18px 20px;
+      transition: border-color .3s, background .3s;
+    }
+    .inq-type:hover {
+      background: rgba(200,169,110,.03);
+      border-color: rgba(200,169,110,.2);
+    }
+    .inq-icon {
+      font-size: .65rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .inq-label {
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cream2);
+    }
+
+    @media(max-width:900px) {
+      .testimonial-card {
+        padding: 36px 28px;
+      }
+      .testimonial-card::before {
+        font-size: 3.5rem;
+        top: 12px;
+        left: 20px;
+      }
+      .tc-quote {
+        font-size: 1rem;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .inquiry-types {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ── CREDENTIAL BAND ── */
     .cred-band {
       display: flex;
@@ -285,6 +600,25 @@
       .book-grid { grid-template-columns:1fr; gap:48px; }
       .book-cover { width: 180px; margin: 0 auto; }
       .cred-band { gap: 24px; padding: 20px 5vw; justify-content: flex-start; }
+      .kh-categories { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .kh-teaser { padding: 60px 5vw; }
+      .kh-teaser-header { margin-bottom: 36px; }
+      .kh-cat-card { padding: 24px 18px; }
+      .kh-cat-icon { font-size: 1rem; }
+      .kh-cat-title { font-size: 1.05rem; }
+      .kh-cat-desc { font-size: .75rem; line-height: 1.5; }
+      .kh-cat-count { font-size: .5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-section { padding: 60px 5vw; }
+    }
+
+    @media (max-width: 480px) {
+      .kh-categories { grid-template-columns: 1fr; gap: 8px; }
+      .kh-teaser { padding: 40px 4vw; }
+      .kh-teaser-header { margin-bottom: 28px; }
+      .kh-cat-card { padding: 18px 14px; }
+      .kh-cat-title { font-size: .95rem; }
+      .kh-cat-desc { font-size: .72rem; }
     }
 
     /* ── CORE EXPERTISE HORIZONTAL SLIDE ── */
@@ -558,9 +892,9 @@
     <li><a href="home.html" class="active">Home</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="book.html">Book</a></li>
-    <li><a href="testimonials.html">Testimonials</a></li>
+    <li><a href="resources.html">Knowledge Hub</a></li>
     <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <a class="nav-cta" href="contact.html">Let's Talk</a>
   <button class="theme-tog" onclick="toggleTheme()" title="Toggle theme">
@@ -576,9 +910,9 @@
   <a href="home.html"><span>Home</span><span class="active-dot"></span></a>
   <a href="portfolio.html"><span>Portfolio</span></a>
   <a href="book.html"><span>Book</span></a>
-  <a href="testimonials.html"><span>Testimonials</span></a>
+  <a href="resources.html"><span>Knowledge Hub</span></a>
   <a href="gallery.html"><span>Gallery</span></a>
-  <a href="contact.html"><span>Contact</span></a>
+  <a href="#contact"><span>Contact</span></a>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -586,22 +920,22 @@
   <div class="deco-l"></div><div class="deco-r"></div>
   <div>
     <div class="hero-tags rv">
-      <span class="hero-tag gold">MBA, MA</span>
-      <span class="hero-tag">KYC/AML</span>
-      <span class="hero-tag">Cybersecurity</span>
+      <span class="hero-tag gold">Cybersecurity</span>
       <span class="hero-tag">GRC</span>
+      <span class="hero-tag">KYC/AML</span>
+      <span class="hero-tag">NIST CSF 2.0</span>
       <span class="hero-tag">Eurail · Netherlands</span>
     </div>
     <h1 class="display-xl rv d1">I build order<br>where there is<br><em>operational chaos.</em></h1>
     <p class="lead rv d2" style="margin-top:28px">
-      I work at the intersection of KYC compliance, cybersecurity, and operational governance — turning complex regulatory risk into frameworks that protect institutions when it matters most. I apply the NIST Cybersecurity Framework to map technical gaps against GDPR, PCI DSS, and SOC 2. I translate vulnerability into board-level narratives and turn regulatory pressure into operational controls that actually hold.
+      Cybersecurity is not a feature — it is the foundation. I build GRC and operational governance frameworks that hold under real-world pressure: ransomware events, regulatory audits, and board scrutiny. My work applies the NIST Cybersecurity Framework, ISO 42001, and proven control design principles to protect institutions when it matters most.
     </p>
     <p class="lead rv d3" style="margin-top:16px; font-size:.9rem">
-      If you are building a compliance, GRC, or cybersecurity function that needs to be both audit-ready and crisis-proof — let's talk.
+      If you are building a cybersecurity, GRC, or compliance function that needs to be both audit-ready and crisis-proof — let's talk.
     </p>
     <div style="display:flex;gap:14px;margin-top:44px;flex-wrap:wrap" class="rv d4">
-      <a class="btn" href="portfolio.html"><span>View Portfolio</span></a>
-      <a class="btn-ghost" href="contact.html">Start a Conversation</a>
+      <a class="btn" href="resources.html"><span>Knowledge Hub</span></a>
+      <a class="btn-ghost" href="#contact">Start a Conversation</a>
     </div>
   </div>
   <div class="portrait-wrap rv d2">
@@ -616,19 +950,19 @@
 
 <!-- ═══ CREDENTIAL BAND ═══ -->
 <div class="cred-band rv">
-  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">NIST Cybersecurity Framework</span></div>
+  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">NIST CSF 2.0</span></div>
   <div class="cred-sep"></div>
-  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">GDPR</span></div>
+  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">Google Cybersecurity</span></div>
+  <div class="cred-sep"></div>
+  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">ISO 42001 (AI Governance)</span></div>
   <div class="cred-sep"></div>
   <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">PCI DSS</span></div>
   <div class="cred-sep"></div>
+  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">GDPR / NIS2</span></div>
+  <div class="cred-sep"></div>
   <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">SOC 2</span></div>
   <div class="cred-sep"></div>
-  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">Google Cybersecurity Certificate</span></div>
-  <div class="cred-sep"></div>
   <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">KYC/AML Due Diligence</span></div>
-  <div class="cred-sep"></div>
-  <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">PEP / EDD Screening</span></div>
   <div class="cred-sep"></div>
   <div class="cred-item"><div class="cred-dot"></div><span class="cred-text">ISS Erasmus · LAUTECH MBA</span></div>
 </div>
@@ -773,7 +1107,7 @@
       </div>
     </div>
     <div style="display:flex;gap:13px;flex-wrap:wrap;margin-top:32px" class="rv d4">
-      <a class="btn" href="contact.html"><span>Work With Me</span></a>
+      <a class="btn" href="#contact"><span>Work With Me</span></a>
       <a class="btn-ghost" href="book.html">Get the Book</a>
     </div>
   </div>
@@ -843,11 +1177,167 @@
   </div>
 </section>
 
+<!-- ═══ TESTIMONIAL CAROUSEL ═══ -->
+<section class="testimonial-section">
+  <div class="testimonial-wrapper">
+    <div class="rv" style="text-align:center;margin-bottom:52px">
+      <p class="eyebrow">Testimonials</p>
+      <h2 class="display">What colleagues<br><em>have to say.</em></h2>
+    </div>
+    <div class="testimonial-track">
+      <div class="testimonial-slides" id="testimonialSlides">
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="tc-avatar"><span class="tc-initials">BD</span></div>
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-quote">"I had the pleasure of reporting directly to Joy. Her exceptional ability to translate customer needs into actionable product requirements is truly impressive. Beyond her technical expertise, Joy's empathetic approach to customer service fosters strong relationships and drives customer loyalty."</p>
+            <div class="tc-sep"></div>
+            <div class="tc-name">Blessing Daniel</div>
+            <div class="tc-role">Customer Support Specialist</div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="tc-avatar"><span class="tc-initials">OO</span></div>
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-quote">"Joy has a knack for turning customer needs into clear, actionable product plans that consistently align with business goals. In customer service, Joy stands out with her empathy, professionalism, and problem-solving skills. She combines technical excellence with exceptional interpersonal skills."</p>
+            <div class="tc-sep"></div>
+            <div class="tc-name">Oluwatoyin Okeniyi</div>
+            <div class="tc-role">Finance Professional · MBA, CPA, CGA, FCCA</div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="tc-avatar"><span class="tc-initials">TA</span></div>
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-quote">"Folashade was an invaluable member of our Business Development team. Her achievements included developing and executing successful business growth strategies, building strong client relationships, and identifying new opportunities to drive revenue growth."</p>
+            <div class="tc-sep"></div>
+            <div class="tc-name">Taofiq Aminu</div>
+            <div class="tc-role">Group Head · Polaris Bank</div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="tc-avatar"><span class="tc-initials">AA</span></div>
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-quote">"Folashade is a standout professional in business development and relationship management. She excels in building strong relationships, driving revenue growth, and thinking strategically. Her commitment to excellence has yielded impressive results."</p>
+            <div class="tc-sep"></div>
+            <div class="tc-name">Ayokunle Ayoko</div>
+            <div class="tc-role">Board Governance & Legal Advisor</div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="tc-avatar"><span class="tc-initials">DO</span></div>
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-quote">"Folashade provided me with exceptional service at Polaris Bank, showcasing her professionalism, prompt responses, and personalized solutions. She demonstrated impressive expertise in credit risk management and relationship management."</p>
+            <div class="tc-sep"></div>
+            <div class="tc-name">Dotun Oyedeji</div>
+            <div class="tc-role">CEO · Waverider Services Ltd.</div>
+          </div>
+        </div>
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="tc-avatar"><span class="tc-initials">IM</span></div>
+            <div class="tc-stars">★★★★★</div>
+            <p class="tc-quote">"Joy is an exceptional Banker who consistently delivers personalized solutions with a customer-centric approach, going above and beyond to exceed client expectations. Her expertise, professionalism, and dedication to building strong relationships make her a standout performer."</p>
+            <div class="tc-sep"></div>
+            <div class="tc-name">Ibrahim Momoh</div>
+            <div class="tc-role">Relationship Manager & Financial Analyst</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-nav">
+      <button class="tc-arrow" id="tcPrevBtn">←</button>
+      <div class="tc-dots" id="tcDots"></div>
+      <button class="tc-arrow" id="tcNextBtn">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section" id="contact">
+  <div class="contact-grid">
+    <div>
+      <p class="eyebrow rv">Let's Talk</p>
+      <h2 class="display rv d1">Start a<br><em>conversation.</em></h2>
+      <p class="rv d2" style="margin-top:18px;font-size:.9rem;color:var(--cream2);line-height:1.75">
+        I reply thoughtfully to every serious inquiry. Cybersecurity, GRC consulting, speaking, and mentorship — let's connect.
+      </p>
+      <div class="ci-items rv d3">
+        <div><span class="ci-lbl">Email</span><a class="ci-val" href="mailto:jubrillaafolashade@gmail.com">jubrillaafolashade@gmail.com</a></div>
+        <div><span class="ci-lbl">LinkedIn</span><a class="ci-val" href="https://www.linkedin.com/in/afolashade-jubrilla-mba-ma-62036ab9" target="_blank">Afolashade Jubrilla</a></div>
+        <div><span class="ci-lbl">Location</span><span class="ci-val">Utrecht, Netherlands</span></div>
+      </div>
+      <div class="rv d4" style="margin-top:28px">
+        <p class="eyebrow" style="margin-bottom:14px">Open To</p>
+        <div class="inquiry-types">
+          <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Cybersecurity Governance</div></div>
+          <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">GRC Consulting</div></div>
+          <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Speaking</div></div>
+          <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Mentorship</div></div>
+          <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Compliance</div></div>
+          <div class="inq-type"><span class="inq-icon">⬡</span><div class="inq-label">Media & Press</div></div>
+        </div>
+      </div>
+      <div class="avail-box rv d4">
+        <p class="avail-text"><span class="avail-dot"></span><strong>Available for calls & async communication</strong></p>
+      </div>
+    </div>
+    <div class="rv d2" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:32px">
+      <div style="width:120px;height:120px;border:1px solid var(--dim);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--gold)">📅</div>
+      <div>
+        <h3 class="display" style="font-size:1.8rem;margin-bottom:12px">Book a Discovery Call</h3>
+        <p style="font-size:.9rem;color:var(--cream2);max-width:320px;margin:0 auto 24px;line-height:1.7">Select a preferred date and share what you'd like to discuss. I'll respond within 48 hours.</p>
+        <a class="btn" href="contact.html"><span>Book a Call →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KNOWLEDGE HUB TEASER ═══ -->
+<section class="kh-teaser rv">
+  <div class="kh-teaser-header">
+    <p class="eyebrow">Knowledge Hub</p>
+    <h2 class="display">Expert resources for<br><em>cybersecurity leaders.</em></h2>
+  </div>
+  <div class="kh-categories">
+    <div class="kh-cat-card rv">
+      <span class="kh-cat-icon">⬡</span>
+      <h4 class="kh-cat-title">Cybersecurity</h4>
+      <p class="kh-cat-desc">NIST CSF 2.0, ISO 42001, and cybersecurity framework implementation.</p>
+      <span class="kh-cat-count">3 Articles</span>
+    </div>
+    <div class="kh-cat-card rv d1">
+      <span class="kh-cat-icon">⬡</span>
+      <h4 class="kh-cat-title">GRC Frameworks</h4>
+      <p class="kh-cat-desc">Control design, SOC 2, PCI DSS audit readiness, and board communication.</p>
+      <span class="kh-cat-count">3 Articles</span>
+    </div>
+    <div class="kh-cat-card rv d2">
+      <span class="kh-cat-icon">⬡</span>
+      <h4 class="kh-cat-title">KYC/AML</h4>
+      <p class="kh-cat-desc">Due diligence guides, PEP screening, and transaction monitoring protocols.</p>
+      <span class="kh-cat-count">3 Articles</span>
+    </div>
+    <div class="kh-cat-card rv d3">
+      <span class="kh-cat-icon">⬡</span>
+      <h4 class="kh-cat-title">AI Governance</h4>
+      <p class="kh-cat-desc">ISO 42001, AI risk management, and EU AI Act compliance.</p>
+      <span class="kh-cat-count">2 Articles</span>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:52px" class="rv">
+    <a class="btn-ghost" href="resources.html"><span>Explore Knowledge Hub →</span></a>
+  </div>
+</section>
+
 <footer>
   <div class="footer-grid">
     <div>
       <span class="footer-logo">Afolashade Joy <span>Jubrilla</span></span>
-      <p class="footer-tagline">KYC/AML · Cybersecurity · GRC · Operational Governance<br>MBA, MA · Currently at Eurail · Utrecht, Netherlands</p>
+      <p class="footer-tagline">Cybersecurity · GRC · KYC/AML · Operational Governance<br>Google Cybersecurity Certificate · NIST CSF 2.0 · MBA, MA · Eurail, Netherlands</p>
     </div>
     <div>
       <span class="footer-col-title">Navigate</span>
@@ -855,9 +1345,8 @@
         <a href="home.html">Home</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="book.html">Book</a>
-        <a href="testimonials.html">Testimonials</a>
         <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
     <div>
@@ -1073,6 +1562,72 @@
       menu.classList.toggle('active');
       document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
     }
+
+  // Testimonial Carousel
+  (function() {
+    const slides = document.getElementById('testimonialSlides');
+    const dotsContainer = document.getElementById('tcDots');
+    const prevBtn = document.getElementById('tcPrevBtn');
+    const nextBtn = document.getElementById('tcNextBtn');
+    
+    if (!slides) return;
+    
+    const slideCount = slides.querySelectorAll('.testimonial-slide').length;
+    let currentSlide = 0;
+    let autoSlideInterval;
+    const autoSlideDelay = 5000;
+    
+    // Create dots
+    for (let i = 0; i < slideCount; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'tc-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+    
+    const dots = dotsContainer.querySelectorAll('.tc-dot');
+    
+    function updateCarousel() {
+      slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+    }
+    
+    function goToSlide(index) {
+      currentSlide = index;
+      updateCarousel();
+      resetAutoSlide();
+    }
+    
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slideCount;
+      updateCarousel();
+    }
+    
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+      updateCarousel();
+      resetAutoSlide();
+    }
+    
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+    }
+    
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+    
+    // Touch/swipe support
+    let touchStartX = 0;
+    slides.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    slides.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); resetAutoSlide(); }
+    }, { passive: true });
+    
+    // Start auto-slide
+    autoSlideInterval = setInterval(nextSlide, autoSlideDelay);
+  })();
   </script>
 </body>
 </html>
