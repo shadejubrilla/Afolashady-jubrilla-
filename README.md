@@ -4,11 +4,10 @@
 ```
 /
 ├── index.html          ← Landing — cinematic slideshow, "I build order where there is operational chaos"
-├── home.html           ← Home + About (merged) — hero, pillars, metrics, cases, bio, skills, book promo
+├── home.html           ← Home + About + Testimonials Carousel + Contact (merged)
 ├── portfolio.html      ← Portfolio — Experience + Publications + Press + Advocacy (tabbed)
 ├── book.html           ← Dedicated book page — Surviving the AI Recession
-├── testimonials.html   ← Testimonials — 6 written + screenshots + Amazon reviews
-├── gallery.html        ←photo masonry gallery + lightbox
+├── gallery.html        ← 52-photo masonry gallery + lightbox
 ├── contact.html        ← Contact — GRC/consulting inquiry form
 ├── css/style.css       ← ALL shared styles (one file, loaded by every page)
 ├── js/main.js          ← ALL shared JS (cursor, nav, reveal, counters, tilt, lightbox)
