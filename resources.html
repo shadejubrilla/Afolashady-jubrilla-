@@ -11,24 +11,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
-    /* Page Loader */
-    .page-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: opacity .6s ease, visibility .6s ease;
-    }
-    .page-loader.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .loader-content { text-align: center; }
     .loader-name {
       font-family: var(--font-display);
       font-size: 2rem;
@@ -799,17 +781,6 @@
 </head>
 <body>
 
-  <!-- Page Loader -->
-  <div class="page-loader" id="pageLoader">
-    <div class="loader-content">
-      <div class="loader-name">
-        <span>A</span><span>F</span><span>O</span><span>J</span>
-      </div>
-      <div class="loader-bar"></div>
-      <div class="loader-initials">AFJ</div>
-    </div>
-  </div>
-
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 
@@ -1111,25 +1082,6 @@
   <script src="js/main.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger);
-
-    // Page Loader
-    const pageLoader = document.getElementById('pageLoader');
-    const loaderBar = document.querySelector('.loader-bar');
-    const loaderSpans = document.querySelectorAll('.loader-name span');
-    
-    gsap.to(loaderSpans, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      delay: 0.3,
-      ease: 'power3.out',
-      onComplete: () => loaderBar.classList.add('loaded')
-    });
-    
-    setTimeout(() => {
-      pageLoader.classList.add('hidden');
-    }, 2200);
 
     // Scroll Progress Bar
     const scrollProgressBar = document.getElementById('scrollProgressBar');

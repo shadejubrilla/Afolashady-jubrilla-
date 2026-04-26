@@ -11,6 +11,77 @@
   <script src="js/main.js"></script>
   <style>
     /* Only gallery-specific overrides here */
+    #main-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 6vw;
+      transition: padding .5s ease;
+    }
+    #main-nav .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-decoration: none;
+    }
+    #main-nav .nav-logo b { color: var(--gold); }
+    #main-nav .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    #main-nav .nav-links a {
+      font-size: .72rem;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream2);
+      text-decoration: none;
+    }
+    #main-nav .nav-links a:hover,
+    #main-nav .nav-links a.active { color: var(--gold); }
+    #main-nav .nav-cta {
+      font-size: .72rem;
+      font-weight: 400;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 11px 26px;
+      text-decoration: none;
+    }
+    #main-nav .theme-tog {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid rgba(200,169,110,.25);
+      color: var(--gold);
+      font-size: 1.1rem;
+      cursor: none;
+    }
+    #main-nav .mob-tog {
+      display: none;
+      background: rgba(6,6,9,.8);
+      border: 1px solid rgba(200,169,110,.3);
+      color: var(--gold);
+      width: 42px;
+      height: 42px;
+      font-size: 1.1rem;
+      cursor: none;
+      align-items: center;
+      justify-content: center;
+    }
     .page-loader {
       position: fixed;
       inset: 0;
@@ -407,8 +478,10 @@
       .gallery-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media(max-width: 900px) {
-      .nav-links, .nav-cta { display: none; }
-      .mob-tog { display: flex; background: none; border: 1px solid var(--gold); color: var(--gold); width: 40px; height: 40px; font-size: 1.2rem; cursor: none; align-items: center; justify-content: center; }
+      #main-nav { padding: 18px 5vw; }
+      #main-nav .nav-links,
+      #main-nav .nav-cta { display: none; }
+      #main-nav .mob-tog { display: flex; }
       .gallery-hero { min-height: 80vh; }
       .gallery-header { margin-bottom: 60px; }
       .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -439,7 +512,7 @@
   <div class="loader-content">
     <div class="loader-name">Afolashade Joy <span>Jubrilla</span></div>
     <div class="loader-bar" id="loader-bar"></div>
-    <div class="loader-initials">AJJ</div>
+    <div class="loader-initials">AFJ</div>
   </div>
 </div>
 

@@ -29,31 +29,7 @@ body {
       color: var(--cream);
     }
 
-    /* Header */
-    .bk-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 6vw;
-      transition: padding .5s ease;
-    }
-    .bk-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--cream);
-      text-decoration: none;
-      flex-shrink: 0;
-    }
-    .bk-logo:hover { color: var(--gold); }
-    .bk-logo b { color: var(--gold); font-weight: 500; }
+    /* Theme Toggle */
     .theme-tog {
       width: 42px;
       height: 42px;
@@ -61,7 +37,6 @@ body {
       align-items: center;
       justify-content: center;
       border: 1px solid rgba(200,169,110,.25);
-      border-radius: 50%;
       background: transparent;
       color: var(--gold);
       font-size: 1.1rem;
@@ -405,24 +380,47 @@ body {
   <div id="c-dot"></div>
   <div id="c-ring"></div>
 
-  <header class="bk-header" style="background: var(--bg); border-bottom: 1px solid var(--dim); padding: 16px 6vw;">
-    <a class="bk-logo" href="home.html">Afolashade Joy <b>Jubrilla</b></a>
-    <ul class="nav-links" style="display: flex; gap: 24px; list-style: none; margin: 0; padding: 0;">
-      <li><a href="home.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Home</a></li>
-      <li><a href="portfolio.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Portfolio</a></li>
-      <li><a href="book.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Book</a></li>
-      <li><a href="resources.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Knowledge Hub</a></li>
-      <li><a href="gallery.html" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none;">Gallery</a></li>
-      <li><a href="contact.html" class="active" style="font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); text-decoration: none;">Contact</a></li>
+  <header id="main-nav" style="background: var(--bg); border-bottom: 1px solid var(--dim);">
+    <a class="nav-logo" href="home.html">Afolashade Joy <b>Jubrilla</b></a>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="book.html">Book</a></li>
+      <li><a href="resources.html">Knowledge Hub</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
     <button class="theme-tog" onclick="toggleTheme()"><span class="theme-icon">◐</span></button>
+    <button class="mob-tog" onclick="toggleMobileMenu()">☰</button>
   </header>
 
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header"><span>Navigation</span></div>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
+    <a href="home.html"><span>Home</span></a>
+    <a href="portfolio.html"><span>Portfolio</span></a>
+    <a href="book.html"><span>Book</span></a>
+    <a href="resources.html"><span>Knowledge Hub</span></a>
+    <a href="gallery.html"><span>Gallery</span></a>
+    <a href="contact.html" class="active"><span>Contact</span><span class="active-dot"></span></a>
+  </div>
+
   <style>
-    .nav-links a:hover { color: var(--gold) !important; }
+    #main-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; display: flex; align-items: center; justify-content: space-between; padding: 16px 6vw; background: var(--bg); border-bottom: 1px solid var(--dim); }
+    .nav-logo { font-family: var(--font-display); font-size: 1rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--cream); text-decoration: none; }
+    .nav-logo b { color: var(--gold); }
+    .nav-links { display: flex !important; gap: 24px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--cream2); text-decoration: none; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .theme-tog, .mob-tog { background: transparent; border: 1px solid rgba(200,169,110,.25); color: var(--gold); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .theme-tog span, .mob-tog span { font-size: 1.1rem; }
+    .theme-tog { margin-left: 16px; }
+    .mob-tog { display: none; }
     @media (max-width: 900px) {
-      .bk-header .nav-links { display: none; }
-      .bk-header { padding: 16px 5vw !important; }
+      #main-nav { padding: 16px 5vw; }
+      .nav-links { display: none !important; }
+      .mob-tog { display: flex; }
     }
   </style>
 
@@ -648,6 +646,13 @@ body {
 
     // Init
     renderCalendar();
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (!menu) return;
+      menu.classList.toggle('active');
+      document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+    }
   </script>
 </body>
 </html>
