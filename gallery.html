@@ -248,13 +248,13 @@
 
     /* Fullscreen Gallery - Premium */
     .gallery-fullscreen {
-      position: fixed !important;
-      inset: 0 !important;
-      z-index: 500 !important;
-      background: var(--bg) !important;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #000;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .5s var(--ease);
+      transition: opacity .5s ease;
     }
     .gallery-fullscreen.active {
       opacity: 1;
@@ -278,27 +278,45 @@
       color: var(--gold);
     }
     .fullscreen-image {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
+      z-index: 998;
       opacity: 0;
-      transition: opacity .4s var(--ease);
+      transition: opacity .4s ease;
     }
     .fullscreen-image.active { opacity: 1; }
-    .fullscreen-nav {
+.fullscreen-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+      z-index: 1000;
       width: 60px; height: 60px;
-      background: rgba(6,6,9,.7);
+      background: rgba(6,6,9,.9);
       border: 1px solid var(--dim);
       color: var(--cream);
       font-size: 1.5rem;
-      cursor: none;
+      cursor: pointer;
       transition: all .3s;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+    .fullscreen-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      z-index: 1000;
+      width: 50px; height: 50px;
+      background: rgba(6,6,9,.9);
+      border: 1px solid var(--dim);
+      color: var(--cream);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all .3s;
     }
     .fullscreen-nav:hover {
       background: var(--gold);
@@ -309,6 +327,7 @@
     .fullscreen-next { right: 30px; }
     .fullscreen-counter {
       position: absolute;
+      z-index: 1000;
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
@@ -319,6 +338,7 @@
     }
     .fullscreen-thumbnails {
       position: absolute;
+      z-index: 1000;
       bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
@@ -379,7 +399,7 @@
       background: linear-gradient(to top, rgba(6,6,9,.9) 0%, transparent 50%);
       z-index: 2;
       opacity: 0;
-      transition: opacity .4s var(--ease);
+      transition: opacity .4s ease;
     }
     .gallery-card:hover::before { opacity: 1; }
     .gallery-card img {
@@ -686,11 +706,13 @@
       currentIndex = index;
       updateFullscreen();
       fullscreenGallery.classList.add('active');
+      fullscreenImage.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function closeFullscreen() {
       fullscreenGallery.classList.remove('active');
+      fullscreenImage.classList.remove('active');
       document.body.style.overflow = '';
     }
 
