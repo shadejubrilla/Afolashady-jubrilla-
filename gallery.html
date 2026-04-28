@@ -248,10 +248,10 @@
 
     /* Fullscreen Gallery - Premium */
     .gallery-fullscreen {
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      background: var(--bg);
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 500 !important;
+      background: var(--bg) !important;
       opacity: 0;
       pointer-events: none;
       transition: opacity .5s var(--ease);
@@ -342,6 +342,7 @@
     .gallery-section {
       padding: 100px 6vw;
       background: var(--bg);
+      overflow-x: visible;
     }
     .gallery-header {
       text-align: center;
@@ -359,6 +360,10 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      overflow-x: visible;
+    }
+    .gallery-card {
+      display: block;
     }
     .gallery-card {
       position: relative;
@@ -499,6 +504,7 @@
       .gallery-card { aspect-ratio: 3/4; }
       .gallery-floating-cta { bottom: 20px; right: 20px; padding: 12px 20px; font-size: .66rem; }
       footer .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .fullscreen-gallery { position: fixed !important; inset: 0 !important; width: 100% !important; height: 100% !important; }
       .fullscreen-nav { width: 44px; height: 44px; }
       .fullscreen-prev { left: 15px; }
       .fullscreen-next { right: 15px; }
@@ -608,14 +614,37 @@
       { src: 'images/shady1.jpg', title: 'Professional Profile', category: 'Corporate' },
       { src: 'images/shady2.jpg', title: 'Global Experience', category: 'International' },
       { src: 'images/shady3.jpg', title: 'Current Role', category: 'Eurail' },
+      { src: 'images/shady8.jpg', title: 'Industry Expertise', category: 'Finance' },
       { src: 'images/sky-bank.jpg', title: 'Banking Sector', category: 'Finance' },
+      { src: 'images/polaris.jpg', title: 'Leadership Role', category: 'Corporate' },
       { src: 'images/book-cover.JPG', title: 'Published Author', category: 'Book Launch' },
-      { src: 'images/Review.jpeg', title: 'Media Feature', category: 'Press' },
-      { src: 'images/Review2.jpeg', title: 'Expert Opinion', category: 'Thought Leadership' },
       { src: 'images/africa.jpg', title: 'Academic Research', category: 'Publication' },
-      { src: 'images/amazon-review1.JPG', title: 'Reader Impact', category: 'Reviews' },
-      { src: 'images/amazon-review2.JPG', title: 'Global Reach', category: 'Amazon' },
-      { src: 'images/amazon-review3.JPG', title: 'Continued Journey', category: 'Recognition' }
+      { src: 'images/work-space.jpg', title: 'Workspace', category: 'Professional' },
+      { src: 'images/outlier.jpg', title: 'Feature Story', category: 'Press' },
+      { src: 'images/001.jpg', title: 'Corporate Event', category: 'Events' },
+      { src: 'images/002.jpg', title: 'Team Gathering', category: 'Events' },
+      { src: 'images/22.jpg', title: 'Milestone', category: 'Events' },
+      { src: 'images/group1.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group2.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group3.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group4.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group5.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group6.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group7.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group8.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group9.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/group11.JPG', title: 'Team Collaboration', category: 'Group' },
+      { src: 'images/img10.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img16.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img18.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img22.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img26.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img30.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img37.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img46.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/img9.jpg', title: 'Professional Moment', category: 'Corporate' },
+      { src: 'images/new.jpg', title: 'New Feature', category: 'Press' },
+      { src: 'images/mama.JPG', title: 'Special Moment', category: 'Personal' }
     ];
 
     // Generate Gallery Cards
